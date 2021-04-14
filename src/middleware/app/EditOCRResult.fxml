@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="middleware.app.EditOCRResultController">
+   <children>
+      <VBox layoutX="-3.0" layoutY="4.0" prefHeight="600.0" prefWidth="800.0">
+         <children>
+            <HBox nodeOrientation="LEFT_TO_RIGHT" prefHeight="476.0" prefWidth="800.0">
+               <children>
+                  <AnchorPane prefHeight="504.0" prefWidth="384.0">
+                     <children>
+                        <ImageView fx:id="ocrImage" fitHeight="425.0" fitWidth="400.0" layoutY="79.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label layoutX="159.0" layoutY="14.0" text="Image">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="480.0" prefWidth="393.0">
+                     <children>
+                        <TextArea fx:id="ocrTextArea" layoutY="79.0" prefHeight="425.0" prefWidth="393.0" />
+                        <Label layoutX="171.0" layoutY="14.0" text="OCR Results">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="148.0" layoutY="45.0" text="Edit results to change" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </HBox>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="editOCRBackBtn" layoutX="53.0" layoutY="33.0" mnemonicParsing="false" prefWidth="120.0" text="Back" />
+                  <Button fx:id="editOCRSaveChangesBtn" layoutX="642.0" layoutY="33.0" mnemonicParsing="false" prefWidth="120.0" text="Save Changes" />
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
