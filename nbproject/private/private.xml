@@ -3,7 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/jr110/Netbeans/Middleware%20App/src/middleware/app/MiddlewareApp.java</file>
+            <file>file:/C:/Users/jr110/Netbeans/MiddlewareApp/src/middleware/app/MiddlewareApp.java</file>
+            <file>file:/C:/Users/jr110/Netbeans/MiddlewareApp/src/middleware/app/FXMLOCRController.java</file>
+            <file>file:/C:/Users/jr110/Netbeans/MiddlewareApp/src/middleware/app/FXMLOCR.fxml</file>
+            <file>file:/C:/Users/jr110/Netbeans/MiddlewareApp/src/middleware/app/OCRController.java</file>
         </group>
     </open-files>
 </project-private>
