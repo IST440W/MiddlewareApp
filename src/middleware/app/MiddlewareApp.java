@@ -53,7 +53,7 @@ public class MiddlewareApp extends Application {
     public static void main(String[] args)throws FileNotFoundException, IOException, ClassNotFoundException {
         launch(args);
         
-        //Move to own class and method
+//        //Move to own class and method
 //       Tesseract tesseract = new Tesseract(); 
 //        try { 
 //  
@@ -70,6 +70,6 @@ public class MiddlewareApp extends Application {
 //        
 //        catch (TesseractException e) { 
 //            e.printStackTrace(); 
-//        } 
+//       } 
     }
 }
