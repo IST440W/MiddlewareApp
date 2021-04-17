@@ -34,9 +34,6 @@
     <jar href="lib\tess4j-3.4.8.jar" size="5212199" download="eager" />
     <jar href="lib\xmlgraphics-commons-1.5.jar" size="601866" download="eager" />
   </resources>
-  <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="MiddlewareApp" >
-    <param name="requiredFXVersion" value="8.0+"/>
-  </applet-desc>
   <jfx:javafx-desc  width="800" height="600" main-class="middleware.app.MiddlewareApp"  name="MiddlewareApp" />
   <update check="always"/>
 </jnlp>
