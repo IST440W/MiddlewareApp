@@ -144,6 +144,7 @@ public class DecryptionResultsController implements Initializable {
         con.setRequestMethod("POST");
         con.setRequestProperty("Content-Type", "application/json; utf-8");
         con.setRequestProperty("Accept", "application/json");
+        con.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11");
         con.setDoOutput(true);
 
         try ( OutputStream os = con.getOutputStream()) {
