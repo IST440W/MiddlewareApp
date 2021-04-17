@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="middleware.app.OCRResultViewController">
+   <children>
+      <VBox layoutX="-3.0" layoutY="4.0" prefHeight="600.0" prefWidth="800.0">
+         <children>
+            <AnchorPane prefHeight="141.0" prefWidth="800.0">
+               <children>
+                  <Button fx:id="closeAppBtn" layoutX="626.0" layoutY="81.0" mnemonicParsing="false" onAction="#closeApplication" text="Close Application" />
+                  <Label layoutX="251.0" layoutY="69.0" text="Optical Character Recognition Results">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="logoutBtn" layoutX="37.0" layoutY="81.0" mnemonicParsing="false" onAction="#logoutBtnPressed" prefWidth="140.0" text="Logout" />
+                  <Label fx:id="welcomeTitleLabel" contentDisplay="CENTER" layoutX="210.0" layoutY="21.0" text="Middleware Decryption Application ">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <HBox nodeOrientation="LEFT_TO_RIGHT" prefHeight="407.0" prefWidth="782.0">
+               <children>
+                  <AnchorPane prefHeight="407.0" prefWidth="385.0">
+                     <children>
+                        <ImageView fx:id="ocrImage" fitHeight="332.0" fitWidth="282.0" layoutX="88.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="88.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="75.0" />
+                        <Label layoutX="142.0" layoutY="14.0" text="Image Preview">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="407.0" prefWidth="385.0">
+                     <children>
+                        <TextArea fx:id="ocrTextArea" layoutX="12.0" layoutY="75.0" prefHeight="332.0" prefWidth="360.0">
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding></TextArea>
+                        <Label layoutX="149.0" layoutY="14.0" text="OCR Results">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="67.0" layoutY="47.0" text="Edit results and save changes to update" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </HBox>
+            <AnchorPane prefHeight="96.0" prefWidth="778.0">
+               <children>
+                  <Button fx:id="ocrBackBtn" layoutX="51.0" layoutY="18.0" mnemonicParsing="false" onAction="#changeToFileView" prefWidth="140.0" text="Back" />
+                  <Button fx:id="ocrSaveChangesBtn" layoutX="400.0" layoutY="18.0" mnemonicParsing="false" onAction="#editOCRResults" prefWidth="140.0" text="Save Changes" />
+                  <Button fx:id="beginDecryptBtn" layoutX="623.0" layoutY="18.0" mnemonicParsing="false" onAction="#beginDecryption" prefWidth="140.0" text="Begin Decryption" />
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
