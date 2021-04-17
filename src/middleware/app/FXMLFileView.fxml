@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="middleware.app.FXMLFileViewController">
+   <children>
+      <SplitPane dividerPositions="0.3595317725752508" layoutX="-2.0" layoutY="-4.0" orientation="VERTICAL" prefHeight="608.0" prefWidth="806.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="153.0" prefWidth="605.0">
+               <children>
+                  <Label fx:id="welcomeTitleLabel" contentDisplay="CENTER" layoutX="212.0" layoutY="23.0" text="Middleware Decryption Application ">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="selectImageLabel" layoutX="248.0" layoutY="137.0" text="Please select an image file to begin decryption" />
+                  <Button fx:id="selectImageBtn" layoutX="345.0" layoutY="169.0" mnemonicParsing="false" onAction="#getSelectedImage" text="Select Image..." />
+                  <Button fx:id="closeAppBtn" layoutX="624.0" layoutY="92.0" mnemonicParsing="false" onAction="#closeApplication" prefWidth="140.0" text="Close Application" />
+                  <Button fx:id="logoutBtn" layoutX="36.0" layoutY="92.0" mnemonicParsing="false" onAction="#logoutBtnPressed" prefWidth="140.0" text="Logout" />
+                  <Label fx:id="noImageSelLabel" layoutX="507.0" layoutY="174.0" opacity="0.0" text="Image must be selected to continue" textFill="RED" />
+               </children></AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="243.0" prefWidth="605.0">
+               <children>
+                  <ScrollPane layoutX="125.0" layoutY="45.0" prefHeight="308.0" prefWidth="354.0">
+                     <content>
+                        <ImageView fx:id="fileImage" fitHeight="307.0" fitWidth="354.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" />
+                     </content>
+                  </ScrollPane>
+                  <Button fx:id="getResultsBtn" layoutX="544.0" layoutY="159.0" mnemonicParsing="false" onAction="#getOCRResults" prefWidth="140.0" text="Run OCR" />
+                  <Label fx:id="imageNameLabel" layoutX="262.0" layoutY="14.0" text="imageName" />
+               </children></AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
