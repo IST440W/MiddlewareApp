@@ -25,11 +25,11 @@
                <children>
                   <AnchorPane layoutX="226.0" layoutY="101.0" prefHeight="232.0" prefWidth="318.0">
                      <children>
-                        <Button layoutX="147.0" layoutY="177.0" mnemonicParsing="false" prefWidth="140.0" text="Login" />
+                        <Button fx:id="loginAppBtn" layoutX="147.0" layoutY="177.0" mnemonicParsing="false" onAction="#authenticate" prefWidth="140.0" text="Login" />
                         <Label layoutX="23.0" layoutY="64.0" text="Username:" />
                         <Label layoutX="27.0" layoutY="106.0" text="Password:" />
                         <TextField fx:id="usernameTextField" layoutX="100.0" layoutY="59.0" />
-                        <TextField fx:id="passwordTextField" layoutX="100.0" layoutY="101.0" />
+                        <PasswordField fx:id="passwordTextField" layoutX="100.0" layoutY="101.0" />
                      </children>
                   </AnchorPane>
                   <Label layoutX="284.0" layoutY="62.0" text="Please login below for access">
@@ -37,7 +37,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="loginErrorLabel" layoutX="534.0" layoutY="158.0" opacity="0.54" prefHeight="77.0" prefWidth="249.0" text="No match found for Username or Password.  Please try again or contact System Administrator for access." textAlignment="CENTER" textFill="RED" wrapText="true" />
+                  <Label fx:id="loginErrorLabel" layoutX="534.0" layoutY="158.0" opacity="0.0" prefHeight="77.0" prefWidth="249.0" text="No match found for Username or Password.  Please try again or contact System Administrator for access." textAlignment="CENTER" textFill="RED" wrapText="true" />
                   <Button fx:id="closeAppBtn" layoutX="614.0" layoutY="17.0" mnemonicParsing="false" onAction="#closeApplication" prefWidth="140.0" text="Close Application" />
                </children>
             </AnchorPane>
