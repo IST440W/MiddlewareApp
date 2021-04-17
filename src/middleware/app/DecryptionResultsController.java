@@ -131,82 +131,48 @@ public class DecryptionResultsController implements Initializable {
 
     private void sendPost(String sendMessage, String destinationURL) throws Exception {
 
-        //Change sendMessage to JSON
-        JSONObject obj1 = new JSONObject();
-        obj1.put("target", "en");
-        obj1.put("q", sendMessage);
-        obj1.put("source", "fr");
+        Map<String, String> arguments = new HashMap<>();
+        arguments.put("q", "Le corbeau vole à minuit");
+        arguments.put("source", "fr");
+        arguments.put("target", "en");// This is a fake password obviously
+        StringJoiner sj = new StringJoiner("&");
+        for (Map.Entry<String, String> entry : arguments.entrySet()) {
+            sj.add(URLEncoder.encode(entry.getKey(), "UTF-8") + "="
+                    + URLEncoder.encode(entry.getValue(), "UTF-8"));
+        }
+        byte[] output = sj.toString().getBytes(StandardCharsets.UTF_8);
+        int length = output.length;
 
-        String jsonInputString = "{ q: " + "\"" + sendMessage + "\"" + ", source: \"fr\", target: \"en\" }";
-
+        // Create new URL with local server address
         URL url = new URL("https://libretranslate.com/translate");
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
-        con.setRequestMethod("POST");
-        con.setRequestProperty("Content-Type", "application/json; utf-8");
-        con.setRequestProperty("Accept", "application/json");
-        con.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11");
-        con.setDoOutput(true);
+        
+        // Create new HttpURLConnection and send POST
+        try {
+            
+            URLConnection con = url.openConnection();
+            HttpURLConnection connection = (HttpURLConnection) con;
+            connection.setRequestMethod("POST");
+            connection.setDoOutput(true);
+            connection.setFixedLengthStreamingMode(length);
+            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+            connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11");
 
-        try ( OutputStream os = con.getOutputStream()) {
-            byte[] input = jsonInputString.getBytes("utf-8");
-            os.write(input, 0, input.length);
-        }
-
-        try ( BufferedReader br = new BufferedReader(
-                new InputStreamReader(con.getInputStream(), "utf-8"))) {
-            StringBuilder response = new StringBuilder();
-            String responseLine = null;
-            while ((responseLine = br.readLine()) != null) {
-                response.append(responseLine.trim());
+            connection.connect();
+            try ( OutputStream os = connection.getOutputStream()) {
+                os.write(output);
             }
-            System.out.println(response.toString());
-        }
 
-//        Map<String, String> arguments = new HashMap<>();
-//        arguments.put("q", "Le corbeau vole à minuit");
-//        arguments.put("source", "fr");
-//        arguments.put("target", "en");// This is a fake password obviously
-//        StringJoiner sj = new StringJoiner("&");
-//        for (Map.Entry<String, String> entry : arguments.entrySet()) {
-//            sj.add(URLEncoder.encode(entry.getKey(), "UTF-8") + "="
-//                    + URLEncoder.encode(entry.getValue(), "UTF-8"));
-//        }
-//        byte[] output = sj.toString().getBytes(StandardCharsets.UTF_8);
-//        int length = output.length;
-//
-//        System.out.println(jsonInputString);
-//
-//        // Create new URL with local server address
-//       
-//        // Create new HttpURLConnection and send POST
-//        try {
-//            
-//            URLConnection con = url.openConnection();
-//            HttpURLConnection connection = (HttpURLConnection) con;
-//            connection.setRequestMethod("POST");
-//            connection.setDoOutput(true);
-//            connection.setFixedLengthStreamingMode(length);
-//            connection.setRequestProperty("Content-Type", "application/json");
-//
-//            connection.connect();
-//            try ( OutputStream os = connection.getOutputStream()) {
-//                os.write(output);
-//            }
-//
-////            OutputStream toPost = connection.getOutputStream();
-////            PrintWriter out = new PrintWriter(toPost, true);
-////            out.println(output);
-//            int responseCode = connection.getResponseCode();
-//            System.out.println("Post Response Message: " + responseCode);
-//            if (responseCode == 200) {
-//                String response = getResponse(connection);
-//                System.out.println("Post Response Message: " + response.toString());
-//            } else {
-//                System.out.println("Bad Response Code: " + responseCode);
-//            }
-//        } catch (IOException ex) {
-//            ex.printStackTrace();
-//        }
+            int responseCode = connection.getResponseCode();
+            System.out.println("Post Response Message: " + responseCode);
+            if (responseCode == 200) {
+                String response = getResponse(connection);
+                System.out.println("Post Response Message: " + response.toString());
+            } else {
+                System.out.println("Bad Response Code: " + responseCode);
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     private String getResponse(java.net.HttpURLConnection connection) {
