@@ -31,14 +31,16 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import sun.net.www.http.HttpClient;
 
 /**
  * FXML Controller class
  *
- * @author jr110
+ * @author jr110, Kelley Rafferty, Kurtis Miles
  */
 public class DecryptionResultsController implements Initializable {
 
@@ -50,6 +52,9 @@ public class DecryptionResultsController implements Initializable {
 
     @FXML
     private Button newDecryptBtn;
+    
+    @FXML
+    private TextArea decryptionDisplay1;
 
     private static MiddlewareApp mainInstance;
 
@@ -114,7 +119,7 @@ public class DecryptionResultsController implements Initializable {
         window.show();
     }
 
-    //To send cipher request to Cipher.tools for decryption.
+    //To send cipher decryption request to Cipher.tools for decryption.
     public void runCiphertext() {
         
         //Variables.
@@ -123,24 +128,30 @@ public class DecryptionResultsController implements Initializable {
         String ocrString = mainInstance.getOcrResult();
         ocrString.replace("\n", "").replace("\r", "");
         String cipherQuery;
-        
-        
-        
+       
         try {
+            
+            //Create connection to send query.
             URL endpoint = new URL("https://cipher.tools");
             String endpointString = endpoint.toString();
             cipherQuery = "/api/v1/decode" + "?" + "cipher=" + cipherType + "&key=" + key + "&ciphertext=" + ocrString;
             String urlString = endpoint + cipherQuery;
-            URL myURL = new URL(urlString);
+            URL myURL = new URL(urlString); 
             URLConnection myURLConnection = myURL.openConnection();
             myURLConnection.connect();
+            
+            //Read response.
             BufferedReader in = new BufferedReader(new InputStreamReader(myURLConnection.getInputStream()));
             String inputLine;
-        
-            while ((inputLine = in.readLine()) != null) 
+            String decryptResult = "";
             
-                System.out.println(inputLine);
-        
+            while ((inputLine = in.readLine()) != null) 
+          
+            //Display decrypted result.    
+            decryptResult = inputLine.replace("{", "");
+            decryptionDisplay1.setText(decryptResult);
+            //System.out.println(inputLine);
+            
             in.close();
         } 
         
@@ -244,53 +255,6 @@ public class DecryptionResultsController implements Initializable {
 //        } catch (IOException ex) {
 //            ex.printStackTrace();
 //        }
-    }
-    //To create the JSON for the ciphertext to send to Cipher.Tools for decryption.
-    private void sendGet (String sendMessage, String destinationURL) throws Exception {
-        
-        int key = 8;
-        String cipherType = "caesar";
-        String ocrString = mainInstance.getOcrResult().replace("\n", "");
-        
-        
-        try {
-        URL url = new URL ("https://cipher.tools/api/v1/decode");
-        HttpURLConnection con = (HttpURLConnection)url.openConnection();
-        con.setRequestMethod("GET");
-        con.setRequestProperty("Content-Type", "application/json; utf-8");
-        con.setRequestProperty("Accept", "application/json");
-        con.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11");
-        con.setDoOutput(true);
-        JSONObject obj = new JSONObject();
-        obj.put("cipher", cipherType);
-        obj.put("key", key);
-        obj.put("ciphertext", ocrString);
-        
-        StringWriter out = new StringWriter();
-        obj.writeJSONString(out);
-        
-        
-        String jsonText = out.toString();
-        System.out.println(jsonText);
-        
-        try ( OutputStream os = con.getOutputStream()) {
-            byte[] input = jsonText.getBytes("utf-8");
-            os.write(input, 0, input.length);
-        }
-
-        try ( BufferedReader br = new BufferedReader(
-                new InputStreamReader(con.getInputStream(), "utf-8"))) {
-            StringBuilder response = new StringBuilder();
-            String responseLine = null;
-            while ((responseLine = br.readLine()) != null) {
-                response.append(responseLine.trim());
-            }
-            System.out.println(response.toString());
-        }
-        
-        } catch (Exception e) {}
-        
-        
     }
     
     private String getResponse(java.net.HttpURLConnection connection) {

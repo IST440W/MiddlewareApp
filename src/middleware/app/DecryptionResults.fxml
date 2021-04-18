@@ -38,7 +38,7 @@
                         <Label layoutX="82.0" layoutY="22.0" text="Decryption 1" />
                         <ScrollPane layoutX="20.0" layoutY="62.0" prefHeight="260.0" prefWidth="210.0">
                            <content>
-                              <TextArea prefHeight="260.0" prefWidth="210.0" />
+                              <TextArea fx:id="decryptionDisplay1" prefHeight="260.0" prefWidth="210.0" />
                            </content>
                         </ScrollPane>
                      </children>
