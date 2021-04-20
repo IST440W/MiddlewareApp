@@ -68,6 +68,8 @@ public class DecryptionResultsController implements Initializable {
         stage.close();   
     }
     
+    
+    
     // changes scene to OCRResultView
     public void changeToOCRView(ActionEvent event) throws IOException, Exception{
         //getMainInstance().switchScenes("OCRResultView.fxml");

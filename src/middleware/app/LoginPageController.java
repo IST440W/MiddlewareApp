@@ -24,6 +24,8 @@ public class LoginPageController implements Initializable {
     @FXML
     private Button closeAppBtn;
     
+    
+    
     private static MiddlewareApp mainInstance;
     
     public LoginPageController(){
