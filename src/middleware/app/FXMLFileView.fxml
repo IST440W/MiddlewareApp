@@ -20,7 +20,7 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label fx:id="selectImageLabel" layoutX="219.0" layoutY="131.0" text="Please select an image file to begin processing." />
+                  <Label fx:id="selectImageLabel" layoutX="182.0" layoutY="131.0" text="Please select an image file to begin processing:" />
                   <Button fx:id="selectImageBtn" layoutX="334.0" layoutY="168.0" mnemonicParsing="false" onAction="#getSelectedImage" text="Select Image..." />
                   <Button fx:id="closeAppBtn" layoutX="624.0" layoutY="92.0" mnemonicParsing="false" onAction="#closeApplication" prefWidth="140.0" text="Close Application" />
                   <Button fx:id="logoutBtn" layoutX="36.0" layoutY="92.0" mnemonicParsing="false" onAction="#logoutBtnPressed" prefWidth="140.0" text="Logout" />

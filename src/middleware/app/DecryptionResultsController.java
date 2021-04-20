@@ -156,7 +156,7 @@ public class DecryptionResultsController implements Initializable {
             decryptResult = decryptResult.replace("plaintext:", "");
             decryptResult = decryptResult.replace("}", "");
             decryptionDisplay1.setText(decryptResult);
-            System.out.println(inputLine);
+            System.out.println(decryptResult);
             
             
             in.close();
