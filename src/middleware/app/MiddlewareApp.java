@@ -22,6 +22,7 @@ public class MiddlewareApp extends Application {
     
     private static MiddlewareApp mainInstance;
     private String username = "";
+    private String password = "";
     private String imageName = "";
     private String origFileLoc = "";
     private String currFileLoc = "";
@@ -231,6 +232,20 @@ public class MiddlewareApp extends Application {
      */
     public void setPageDest(String pageDest) {
         this.pageDest = pageDest;
+    }
+
+    /**
+     * @return the password
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * @param password the password to set
+     */
+    public void setPassword(String password) {
+        this.password = password;
     }
         
     }

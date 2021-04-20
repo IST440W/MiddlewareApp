@@ -5,13 +5,21 @@
  */
 package middleware.app;
 
+import java.io.IOException;
 import middleware.app.MiddlewareApp;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 /**
@@ -24,7 +32,21 @@ public class LoginPageController implements Initializable {
     @FXML
     private Button closeAppBtn;
     
+<<<<<<< HEAD
     
+=======
+    @FXML
+    private Button loginAppBtn;
+    
+    @FXML
+    private TextField usernameTextField;
+    
+    @FXML
+    private PasswordField passwordTextField;
+    
+    @FXML
+    private Label loginErrorLabel;
+>>>>>>> 9d211bf5174633f6c4d8c204915f8b8620346b76
     
     private static MiddlewareApp mainInstance;
     
@@ -37,8 +59,31 @@ public class LoginPageController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+        // TODO 
+    }
+
+    @FXML
+    public void authenticate(ActionEvent event) throws IOException {
+        getMainInstance().setUsername(usernameTextField.getText());
+        getMainInstance().setPassword(passwordTextField.getText());
+        
+        if (getMainInstance().getUsername().equals("testing") && getMainInstance().getUsername().equals("testing"))
+        {
+            Parent fileViewParent = FXMLLoader.load(getClass().getResource("FXMLFileView.fxml"));
+            Scene fileView = new Scene(fileViewParent);
+            Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            window.setScene(fileView);
+            window.show();
+            loginErrorLabel.setOpacity(0);
+        }
+        
+        loginErrorLabel.setOpacity(1);
+    }
+    
+    public void loginConfirmed(ActionEvent event) throws IOException
+    {
+       
+    }
     
     @FXML
     public void closeApplication (ActionEvent event){

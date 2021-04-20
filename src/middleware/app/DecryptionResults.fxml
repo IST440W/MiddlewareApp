@@ -14,7 +14,7 @@
          <children>
             <AnchorPane prefHeight="141.0" prefWidth="800.0">
                <children>
-                  <Button fx:id="closeAppBtn" layoutX="637.0" layoutY="97.0" mnemonicParsing="false" onAction="#closeApplication" text="Close Application" />
+                  <Button fx:id="closeAppBtn" layoutX="591.0" layoutY="97.0" mnemonicParsing="false" onAction="#closeApplication" text="Close Application" />
                   <Label layoutX="326.0" layoutY="71.0" text="Decryption Results">
                      <font>
                         <Font size="18.0" />
@@ -38,7 +38,7 @@
                         <Label layoutX="82.0" layoutY="22.0" text="Decryption 1" />
                         <ScrollPane layoutX="20.0" layoutY="62.0" prefHeight="260.0" prefWidth="210.0">
                            <content>
-                              <TextArea prefHeight="260.0" prefWidth="210.0" />
+                              <TextArea fx:id="decryptionDisplay1" prefHeight="260.0" prefWidth="210.0" />
                            </content>
                         </ScrollPane>
                      </children>
