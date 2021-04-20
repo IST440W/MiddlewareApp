@@ -14,7 +14,7 @@
          <children>
             <AnchorPane prefHeight="141.0" prefWidth="800.0">
                <children>
-                  <Button fx:id="closeAppBtn" layoutX="637.0" layoutY="97.0" mnemonicParsing="false" onAction="#closeApplication" text="Close Application" />
+                  <Button fx:id="closeAppBtn" layoutX="591.0" layoutY="97.0" mnemonicParsing="false" onAction="#closeApplication" text="Close Application" />
                   <Label layoutX="326.0" layoutY="71.0" text="Decryption Results">
                      <font>
                         <Font size="18.0" />

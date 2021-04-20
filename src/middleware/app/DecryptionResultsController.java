@@ -128,7 +128,7 @@ public class DecryptionResultsController implements Initializable {
         String ocrString = mainInstance.getOcrResult();
         ocrString.replace("\n", "").replace("\r", "");
         String cipherQuery;
-       
+         
         try {
             
             //Create connection to send query.
@@ -138,7 +138,10 @@ public class DecryptionResultsController implements Initializable {
             String urlString = endpoint + cipherQuery;
             URL myURL = new URL(urlString); 
             URLConnection myURLConnection = myURL.openConnection();
+            //System.out.println(urlString);
             myURLConnection.connect();
+            //System.out.println("Connecting....");
+            
             
             //Read response.
             BufferedReader in = new BufferedReader(new InputStreamReader(myURLConnection.getInputStream()));
@@ -146,11 +149,15 @@ public class DecryptionResultsController implements Initializable {
             String decryptResult = "";
             
             while ((inputLine = in.readLine()) != null) 
-          
+            
             //Display decrypted result.    
             decryptResult = inputLine.replace("{", "");
+            decryptResult = decryptResult.replace("\"", "");
+            decryptResult = decryptResult.replace("plaintext:", "");
+            decryptResult = decryptResult.replace("}", "");
             decryptionDisplay1.setText(decryptResult);
-            //System.out.println(inputLine);
+            System.out.println(inputLine);
+            
             
             in.close();
         } 
