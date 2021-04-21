@@ -5,13 +5,11 @@
  */
 package middleware.app;
 
-
 import java.io.BufferedReader;
 import middleware.app.MiddlewareApp;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
@@ -30,8 +28,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import org.json.simple.JSONObject;
-import sun.net.www.http.HttpClient;
 
 /**
  * FXML Controller class
