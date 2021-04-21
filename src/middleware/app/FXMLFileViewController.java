@@ -58,8 +58,8 @@ public class FXMLFileViewController implements Initializable {
     @FXML
     private ImageView fileImage;
     
-    private String imageLocation = "";
-    private String imageName ="";
+    //private String imageLocation = "";
+   // private String imageName ="";
     private static MiddlewareApp mainInstance;
     
     public FXMLFileViewController(){
@@ -162,33 +162,33 @@ public class FXMLFileViewController implements Initializable {
         }
     }
     
-    /**
-     * @return the imageLocation
-     */
-    public String getImageLocation() {
-        return imageLocation;
-    }
-
-    /**
-     * @param imageLocation the imageLocation to set
-     */
-    public void setImageLocation(String imageLocation) {
-        this.imageLocation = imageLocation;
-    }
-
-    /**
-     * @return the imageName
-     */
-    public String getImageName() {
-        return imageName;
-    }
-
-    /**
-     * @param imageName the imageName to set
-     */
-    public void setImageName(String imageName) {
-        this.imageName = imageName;
-    }
+//    /**
+//     * @return the imageLocation
+//     */
+//    public String getImageLocation() {
+//        return imageLocation;
+//    }
+//
+//    /**
+//     * @param imageLocation the imageLocation to set
+//     */
+//    public void setImageLocation(String imageLocation) {
+//        this.imageLocation = imageLocation;
+//    }
+//
+//    /**
+//     * @return the imageName
+//     */
+//    public String getImageName() {
+//        return imageName;
+//    }
+//
+//    /**
+//     * @param imageName the imageName to set
+//     */
+//    public void setImageName(String imageName) {
+//        this.imageName = imageName;
+//    }
 
     /**
      * @return the mainInstance

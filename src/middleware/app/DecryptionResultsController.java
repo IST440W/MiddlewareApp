@@ -10,7 +10,10 @@ import middleware.app.MiddlewareApp;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
@@ -27,12 +30,16 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import sun.net.www.http.HttpClient;
 
 /**
  * FXML Controller class
  *
- * @author jr110
+ * @author jr110, Kelley Rafferty, Kurtis Miles
  */
 public class DecryptionResultsController implements Initializable {
 
@@ -44,6 +51,9 @@ public class DecryptionResultsController implements Initializable {
 
     @FXML
     private Button newDecryptBtn;
+    
+    @FXML
+    private TextArea decryptionDisplay1;
 
     private static MiddlewareApp mainInstance;
 
@@ -108,10 +118,58 @@ public class DecryptionResultsController implements Initializable {
         window.show();
     }
 
-    public void runCaesar() {
+    //To send cipher decryption request to Cipher.tools for decryption.
+    public void runCiphertext() {
+        
+        //Variables.
+        int key = 8;
+        String cipherType = "caesar";
+        String ocrString = mainInstance.getOcrResult();
+        ocrString.replace("\n", "").replace("\r", "");
+        String cipherQuery;
+         
+        try {
+            
+            //Create connection to send query.
+            URL endpoint = new URL("https://cipher.tools");
+            String endpointString = endpoint.toString();
+            cipherQuery = "/api/v1/decode" + "?" + "cipher=" + cipherType + "&key=" + key + "&ciphertext=" + ocrString;
+            String urlString = endpoint + cipherQuery;
+            URL myURL = new URL(urlString); 
+            URLConnection myURLConnection = myURL.openConnection();
+            //System.out.println(urlString);
+            myURLConnection.connect();
+            //System.out.println("Connecting....");
+            
+            
+            //Read response.
+            BufferedReader in = new BufferedReader(new InputStreamReader(myURLConnection.getInputStream()));
+            String inputLine;
+            String decryptResult = "";
+            
+            while ((inputLine = in.readLine()) != null) 
+            
+            //Display decrypted result.    
+            decryptResult = inputLine.replace("{", "");
+            decryptResult = decryptResult.replace("\"", "");
+            decryptResult = decryptResult.replace("plaintext:", "");
+            decryptResult = decryptResult.replace("}", "");
+            decryptionDisplay1.setText(decryptResult);
+            System.out.println(decryptResult);
+            
+            
+            in.close();
+        } 
+        
+        catch (MalformedURLException e) { 
 
+        } 
+        catch (IOException e) {   
+
+        }
+        
     }
-
+    
     public void runLanguageFrench() {
         try {
             sendPost("Le corbeau vole à minuit", "https://libretranslate.com/translate");
@@ -124,7 +182,7 @@ public class DecryptionResultsController implements Initializable {
     public void runLanguageSpanish() {
 
     }
-
+    
     private void sendPost(String sendMessage, String destinationURL) throws Exception {
 
         Map<String, String> arguments = new HashMap<>();
@@ -170,7 +228,7 @@ public class DecryptionResultsController implements Initializable {
             ex.printStackTrace();
         }
     }
-
+    
     private String getResponse(java.net.HttpURLConnection connection) {
         try ( BufferedReader br = new BufferedReader(
                 new InputStreamReader(connection.getInputStream()))) {
@@ -187,8 +245,7 @@ public class DecryptionResultsController implements Initializable {
         }
         return "";
     }
-
-    /**
+    /*
      * @return the mainInstance
      */
     public static MiddlewareApp getMainInstance() {
