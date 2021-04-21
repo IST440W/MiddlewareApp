@@ -161,6 +161,8 @@ public class OCRResultViewController implements Initializable {
         //access DecryptionResultsController to call methods
         DecryptionResultsController editController = newLoader.getController();
         editController.runCiphertext();
+        editController.runLanguageFrench();
+        editController.runLanguageSpanish();
 
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(decryptionEditView);

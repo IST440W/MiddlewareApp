@@ -54,6 +54,12 @@ public class DecryptionResultsController implements Initializable {
     
     @FXML
     private TextArea decryptionDisplay1;
+    
+    @FXML
+    private TextArea decryptionDisplay2;
+    
+    @FXML
+    private TextArea decryptionDisplay3;
 
     private static MiddlewareApp mainInstance;
 
@@ -172,7 +178,7 @@ public class DecryptionResultsController implements Initializable {
     
     public void runLanguageFrench() {
         try {
-            sendPost("Le corbeau vole à minuit", "https://libretranslate.com/translate");
+            sendPost(mainInstance.getOcrResult(), "fr" , "https://libretranslate.com/translate");
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -180,14 +186,19 @@ public class DecryptionResultsController implements Initializable {
     }
 
     public void runLanguageSpanish() {
-
+        try {
+            sendPost(mainInstance.getOcrResult(), "es", "https://libretranslate.com/translate");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        
     }
     
-    private void sendPost(String sendMessage, String destinationURL) throws Exception {
+    private void sendPost(String sendMessage, String sourceLanguage, String destinationURL) throws Exception {
 
         Map<String, String> arguments = new HashMap<>();
-        arguments.put("q", "Le corbeau vole à minuit");
-        arguments.put("source", "fr");
+        arguments.put("q", sendMessage);
+        arguments.put("source", sourceLanguage);
         arguments.put("target", "en");// This is a fake password obviously
         StringJoiner sj = new StringJoiner("&");
         for (Map.Entry<String, String> entry : arguments.entrySet()) {
@@ -220,8 +231,15 @@ public class DecryptionResultsController implements Initializable {
             System.out.println("Post Response Message: " + responseCode);
             if (responseCode == 200) {
                 String response = getResponse(connection);
+                if (sourceLanguage == "fr")
+                {
+                    decryptionDisplay2.setText(response.toString());
+                }
+                else {decryptionDisplay3.setText(response.toString());}
                 System.out.println("Post Response Message: " + response.toString());
             } else {
+                if(sourceLanguage == "fr"){decryptionDisplay2.setText("Bad Response Code: " + responseCode);}
+                else {decryptionDisplay3.setText("Bad Response Code: " + responseCode);}
                 System.out.println("Bad Response Code: " + responseCode);
             }
         } catch (IOException ex) {
