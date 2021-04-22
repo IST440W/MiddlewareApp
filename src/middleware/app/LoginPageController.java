@@ -6,7 +6,6 @@
 package middleware.app;
 
 import java.io.IOException;
-import middleware.app.MiddlewareApp;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -43,6 +42,7 @@ public class LoginPageController implements Initializable {
     
     @FXML
     private Label loginErrorLabel;
+
     
     private static MiddlewareApp mainInstance;
     
@@ -83,10 +83,14 @@ public class LoginPageController implements Initializable {
     
     @FXML
     public void closeApplication (ActionEvent event){
-        // get a handle to the stage
-        Stage stage = (Stage) closeAppBtn.getScene().getWindow();
-        // do what you have to do
-        stage.close();   
+        boolean result = ConfirmationBox.displayConfirmBox("Are you sure you want to close the program?");
+        if (result == true){
+            // get a handle to the stage
+            Stage stage = (Stage) closeAppBtn.getScene().getWindow();
+            // do what you have to do
+            stage.close();
+        }
+        else{}
     }
     
      /**
