@@ -121,7 +121,7 @@ public class DecryptionResultsController implements Initializable {
 
     //To send cipher decryption request to Cipher.tools for decryption.
     public void runCiphertext() {
-        
+         
         //Variables.
         int key = 8;
         String cipherType = "caesar";
