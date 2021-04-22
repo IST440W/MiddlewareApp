@@ -88,13 +88,7 @@ public class DecryptionResultsController implements Initializable {
         // do what you have to do
         stage.close();
     }
-<<<<<<< HEAD
-    
-    
-    
-=======
 
->>>>>>> 9d211bf5174633f6c4d8c204915f8b8620346b76
     // changes scene to OCRResultView
     public void changeToOCRView(ActionEvent event) throws IOException, Exception {
         //getMainInstance().switchScenes("OCRResultView.fxml");
@@ -133,6 +127,8 @@ public class DecryptionResultsController implements Initializable {
         String cipherType = "caesar";
         String ocrString = mainInstance.getOcrResult();
         ocrString.replace("\n", "").replace("\r", "");
+        
+        
         String cipherQuery;
          
         try {

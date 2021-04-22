@@ -75,14 +75,6 @@ public class OCRResultViewController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-//        try{
-//            getOCR();
-//            setOCRImage();
-//        }
-//        
-//        catch (MalformedURLException ex) {
-//            Logger.getLogger(OCRResultViewController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
 
     }
 

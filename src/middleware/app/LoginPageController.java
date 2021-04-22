@@ -32,9 +32,7 @@ public class LoginPageController implements Initializable {
     @FXML
     private Button closeAppBtn;
     
-<<<<<<< HEAD
-    
-=======
+
     @FXML
     private Button loginAppBtn;
     
@@ -46,7 +44,7 @@ public class LoginPageController implements Initializable {
     
     @FXML
     private Label loginErrorLabel;
->>>>>>> 9d211bf5174633f6c4d8c204915f8b8620346b76
+
     
     private static MiddlewareApp mainInstance;
     
