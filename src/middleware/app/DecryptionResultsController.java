@@ -5,14 +5,10 @@
  */
 package middleware.app;
 
-
 import java.io.BufferedReader;
-import middleware.app.MiddlewareApp;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -33,9 +29,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import sun.net.www.http.HttpClient;
 
 /**
  * FXML Controller class
@@ -55,6 +48,12 @@ public class DecryptionResultsController implements Initializable {
     
     @FXML
     private TextArea decryptionDisplay1;
+    
+    @FXML
+    private TextArea decryptionDisplay2;
+    
+    @FXML
+    private TextArea decryptionDisplay3;
 
     private static MiddlewareApp mainInstance;
 
@@ -72,21 +71,31 @@ public class DecryptionResultsController implements Initializable {
 
     // logs user out and changes to LoginPage scene
     public void logoutBtnPressed(ActionEvent event) throws IOException, Exception {
-        //getMainInstance().switchScenes("LoginPage.fxml");
-
-        Parent fileViewParent = FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
-        Scene fileView = new Scene(fileViewParent);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(fileView);
-        window.show();
+        
+        //Opens user confirmation Box and returns boolean response
+        boolean result = ConfirmationBox.displayConfirmBox("Are you sure you want to log out?");
+        if (result == true){
+            Parent fileViewParent = FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
+            Scene fileView = new Scene(fileViewParent);
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(fileView);
+            window.show();
+        }
+        else{}
     }
 
     // closes application
     public void closeApplication(ActionEvent event) {
-        // get a handle to the stage
-        Stage stage = (Stage) closeAppBtn.getScene().getWindow();
-        // do what you have to do
-        stage.close();
+        
+        //Opens user confirmation Box and returns boolean response
+        boolean result = ConfirmationBox.displayConfirmBox("Are you sure you want to close the program?");
+        if (result == true){
+            // get a handle to the stage
+            Stage stage = (Stage) closeAppBtn.getScene().getWindow();
+            // do what you have to do
+            stage.close();
+        }
+        else{}
     }
 
     // changes scene to OCRResultView
@@ -111,22 +120,34 @@ public class DecryptionResultsController implements Initializable {
 
     // starts new decryption process and changes to FileView for new image selection
     public void startNewDecryption(ActionEvent event) throws IOException, Exception {
-        //getMainInstance().switchScenes("FXMLFileView.fxml");
-        Parent fileViewParent = FXMLLoader.load(getClass().getResource("FXMLFileView.fxml"));
-        Scene fileView = new Scene(fileViewParent);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(fileView);
-        window.show();
+        
+        //Opens user confirmation Box and returns boolean response
+        boolean result = ConfirmationBox.displayConfirmBox("Are you sure you want to start new decryption?");
+        if (result == true){
+            Parent fileViewParent = FXMLLoader.load(getClass().getResource("FXMLFileView.fxml"));
+            Scene fileView = new Scene(fileViewParent);
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(fileView);
+            window.show();
+        }
+        else{}
     }
 
     //To send cipher decryption request to Cipher.tools for decryption.
     public void runCiphertext() {
         
+        String listResults = "";
+        
+        for(int i=0; i<26; i++ ){
+        
         //Variables.
-        int key = 8;
+        int key = i;
         String cipherType = "caesar";
-        String ocrString = mainInstance.getOcrResult();
-        ocrString.replace("\n", "").replace("\r", "");
+        String ocrString = mainInstance.getOcrResult().replaceAll(" ", "_");
+        ocrString = ocrString.replaceAll("\n", "__");
+       
+        //ocrString.replace("\n", "").replace("\r", "");
+        
         
         
         String cipherQuery;
@@ -157,9 +178,15 @@ public class DecryptionResultsController implements Initializable {
             decryptResult = decryptResult.replace("\"", "");
             decryptResult = decryptResult.replace("plaintext:", "");
             decryptResult = decryptResult.replace("}", "");
-            decryptionDisplay1.setText(decryptResult);
-            System.out.println(decryptResult);
+            //decryptResult = decryptResult.replaceAll("__", "\r\n");
+            decryptResult = decryptResult.replaceAll("__", " ");
+            decryptResult = decryptResult.replaceAll("_", " ");
+                        
+            //decryptionDisplay1.setText(decryptResult);
             
+            listResults = (listResults +"\n" + (i+1) + ":  " + decryptResult);
+            decryptionDisplay1.setText(listResults);
+            System.out.println(decryptResult);
             
             in.close();
         } 
@@ -170,12 +197,12 @@ public class DecryptionResultsController implements Initializable {
         catch (IOException e) {   
 
         }
-        
+        } 
     }
     
     public void runLanguageFrench() {
         try {
-            sendPost("Le corbeau vole à minuit", "https://libretranslate.com/translate");
+            sendPost(mainInstance.getOcrResult(), "fr" , "https://libretranslate.com/translate");
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -183,87 +210,65 @@ public class DecryptionResultsController implements Initializable {
     }
 
     public void runLanguageSpanish() {
-
+        try {
+            sendPost(mainInstance.getOcrResult(), "es", "https://libretranslate.com/translate");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        
     }
     
-    private void sendPost(String sendMessage, String destinationURL) throws Exception {
+    private void sendPost(String sendMessage, String sourceLanguage, String destinationURL) throws Exception {
 
-        //Change sendMessage to JSON
-        JSONObject obj1 = new JSONObject();
-        obj1.put("target", "en");
-        obj1.put("q", sendMessage);
-        obj1.put("source", "fr");
+        Map<String, String> arguments = new HashMap<>();
+        arguments.put("q", sendMessage);
+        arguments.put("source", sourceLanguage);
+        arguments.put("target", "en");// This is a fake password obviously
+        StringJoiner sj = new StringJoiner("&");
+        for (Map.Entry<String, String> entry : arguments.entrySet()) {
+            sj.add(URLEncoder.encode(entry.getKey(), "UTF-8") + "="
+                    + URLEncoder.encode(entry.getValue(), "UTF-8"));
+        }
+        byte[] output = sj.toString().getBytes(StandardCharsets.UTF_8);
+        int length = output.length;
 
-        String jsonInputString = "{ q: " + "\"" + sendMessage + "\"" + ", source: \"fr\", target: \"en\" }";
-
+        // Create new URL with local server address
         URL url = new URL("https://libretranslate.com/translate");
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
-        con.setRequestMethod("POST");
-        con.setRequestProperty("Content-Type", "application/json; utf-8");
-        con.setRequestProperty("Accept", "application/json");
-        con.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11");
-        con.setDoOutput(true);
+        
+        // Create new HttpURLConnection and send POST
+        try {
+            
+            URLConnection con = url.openConnection();
+            HttpURLConnection connection = (HttpURLConnection) con;
+            connection.setRequestMethod("POST");
+            connection.setDoOutput(true);
+            connection.setFixedLengthStreamingMode(length);
+            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+            connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11");
 
-        try ( OutputStream os = con.getOutputStream()) {
-            byte[] input = jsonInputString.getBytes("utf-8");
-            os.write(input, 0, input.length);
-        }
-
-        try ( BufferedReader br = new BufferedReader(
-                new InputStreamReader(con.getInputStream(), "utf-8"))) {
-            StringBuilder response = new StringBuilder();
-            String responseLine = null;
-            while ((responseLine = br.readLine()) != null) {
-                response.append(responseLine.trim());
+            connection.connect();
+            try ( OutputStream os = connection.getOutputStream()) {
+                os.write(output);
             }
-            System.out.println(response.toString());
-        }
 
-//        Map<String, String> arguments = new HashMap<>();
-//        arguments.put("q", "Le corbeau vole à minuit");
-//        arguments.put("source", "fr");
-//        arguments.put("target", "en");// This is a fake password obviously
-//        StringJoiner sj = new StringJoiner("&");
-//        for (Map.Entry<String, String> entry : arguments.entrySet()) {
-//            sj.add(URLEncoder.encode(entry.getKey(), "UTF-8") + "="
-//                    + URLEncoder.encode(entry.getValue(), "UTF-8"));
-//        }
-//        byte[] output = sj.toString().getBytes(StandardCharsets.UTF_8);
-//        int length = output.length;
-//
-//        System.out.println(jsonInputString);
-//
-//        // Create new URL with local server address
-//       
-//        // Create new HttpURLConnection and send POST
-//        try {
-//            
-//            URLConnection con = url.openConnection();
-//            HttpURLConnection connection = (HttpURLConnection) con;
-//            connection.setRequestMethod("POST");
-//            connection.setDoOutput(true);
-//            connection.setFixedLengthStreamingMode(length);
-//            connection.setRequestProperty("Content-Type", "application/json");
-//
-//            connection.connect();
-//            try ( OutputStream os = connection.getOutputStream()) {
-//                os.write(output);
-//            }
-//
-////            OutputStream toPost = connection.getOutputStream();
-////            PrintWriter out = new PrintWriter(toPost, true);
-////            out.println(output);
-//            int responseCode = connection.getResponseCode();
-//            System.out.println("Post Response Message: " + responseCode);
-//            if (responseCode == 200) {
-//                String response = getResponse(connection);
-//                System.out.println("Post Response Message: " + response.toString());
-//            } else {
-//                System.out.println("Bad Response Code: " + responseCode);
-//            }
-//        } catch (IOException ex) {
-//            ex.printStackTrace();
-//        }
+            int responseCode = connection.getResponseCode();
+            System.out.println("Post Response Message: " + responseCode);
+            if (responseCode == 200) {
+                String response = getResponse(connection);
+                if (sourceLanguage == "fr")
+                {
+                    decryptionDisplay2.setText(response.toString());
+                }
+                else {decryptionDisplay3.setText(response.toString());}
+                System.out.println("Post Response Message: " + response.toString());
+            } else {
+                if(sourceLanguage == "fr"){decryptionDisplay2.setText("Bad Response Code: " + responseCode);}
+                else {decryptionDisplay3.setText("Bad Response Code: " + responseCode);}
+                System.out.println("Bad Response Code: " + responseCode);
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
     
     private String getResponse(java.net.HttpURLConnection connection) {

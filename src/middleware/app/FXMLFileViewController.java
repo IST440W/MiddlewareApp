@@ -5,7 +5,6 @@
  */
 package middleware.app;
 
-import middleware.app.MiddlewareApp;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -26,7 +25,6 @@ import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
-import javax.imageio.ImageIO;
 import static java.nio.file.StandardCopyOption.*;
 import javafx.fxml.Initializable;
 
@@ -58,8 +56,6 @@ public class FXMLFileViewController implements Initializable {
     @FXML
     private ImageView fileImage;
     
-    //private String imageLocation = "";
-   // private String imageName ="";
     private static MiddlewareApp mainInstance;
     
     public FXMLFileViewController(){
@@ -100,20 +96,34 @@ public class FXMLFileViewController implements Initializable {
     
     //logs user out and returns to LoginPage
     public void logoutBtnPressed(ActionEvent event) throws IOException, Exception{
-        //getMainInstance().switchScenes("LoginPage.fxml");
-        Parent fileViewParent = FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
-        Scene fileView = new Scene(fileViewParent);
-        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        window.setScene(fileView);
-        window.show();    
+        
+        //Opens user confirmation Box and returns boolean response
+        boolean result = ConfirmationBox.displayConfirmBox("Are you sure you want to log out?");
+        if (result == true){
+            Parent fileViewParent = FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
+            Scene fileView = new Scene(fileViewParent);
+            Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            window.setScene(fileView);
+            window.show();
+        }
+        else{
+            
+        }
     }
     
     //closes application
     public void closeApplication (ActionEvent event){
-        // get a handle to the stage
-        Stage stage = (Stage) closeAppBtn.getScene().getWindow();
-        // do what you have to do
-        stage.close();   
+        
+        //Opens user confirmation Box and returns boolean response
+        boolean result = ConfirmationBox.displayConfirmBox("Are you sure you want to close the program?");
+        
+        if (result == true){
+            // get a handle to the stage
+            Stage stage = (Stage) closeAppBtn.getScene().getWindow();
+            // do what you have to do
+            stage.close();
+        }
+        else{}
     }
     
     //changes scene to OCRResultsView and sets imageName and imageLocation    

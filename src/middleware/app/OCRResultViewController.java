@@ -11,8 +11,6 @@ import javafx.scene.image.Image;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,7 +22,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import static middleware.app.FXMLFileViewController.getMainInstance;
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
 
@@ -94,15 +91,22 @@ public class OCRResultViewController implements Initializable {
             //System.out.println(getOcrResult());
 
         } catch (TesseractException e) {
-            e.printStackTrace();
+            ocrTextArea.setText("Unable to get OCR results at this time.");
         }
         //return result;   
     }
 
     //updates ocrResult String with user changes to Tesseract result
     public void editOCRResults() {
-        getMainInstance().setOcrResult(ocrTextArea.getText());
-        System.out.println(getMainInstance().getOcrResult());
+        
+        //Opens user confirmation Box and returns boolean response
+        boolean result = ConfirmationBox.displayConfirmBox("Are you sure you want to update the result?");
+        
+        if (result == true){
+            getMainInstance().setOcrResult(ocrTextArea.getText());
+            System.out.println(getMainInstance().getOcrResult());
+        }
+        else{}
     }
 
     //sets the preview image of file selected
@@ -124,26 +128,38 @@ public class OCRResultViewController implements Initializable {
 
     //  Logs user out and returns to LoginPage
     public void logoutBtnPressed(ActionEvent event) throws IOException, Exception {
-        //getMainInstance().switchScenes("LoginPage.fxml");
-        Parent fileViewParent = FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
-        Scene fileView = new Scene(fileViewParent);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(fileView);
-        window.show();
+        
+        //Opens user confirmation Box and returns boolean response
+        boolean result = ConfirmationBox.displayConfirmBox("Are you sure you want to log out?");
+        
+        if (result == true){
+            Parent fileViewParent = FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
+            Scene fileView = new Scene(fileViewParent);
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(fileView);
+            window.show();
+        }
+        else{}
     }
 
     // closes application
     public void closeApplication(ActionEvent event) {
-        // locates stage to close
-        Stage stage = (Stage) closeAppBtn.getScene().getWindow();
-        // do what you have to do
-        stage.close();
+        
+        //Opens user confirmation Box and returns boolean response
+        boolean result = ConfirmationBox.displayConfirmBox("Are you sure you want to close the program?");
+        
+        if (result == true){
+            // locates stage to close
+            Stage stage = (Stage) closeAppBtn.getScene().getWindow();
+            // do what you have to do
+            stage.close();
+        }
+        else{}
     }
 
     // sends ocrResult String to decryption controller and changes scene
     public void beginDecryption(ActionEvent event) throws IOException, Exception {
-        //getMainInstance().switchScenes("DecryptionResults.fxml");
-
+        
         FXMLLoader newLoader = new FXMLLoader();
         newLoader.setLocation(getClass().getResource("DecryptionResults.fxml"));
         Parent decryptionView = newLoader.load();
@@ -153,6 +169,8 @@ public class OCRResultViewController implements Initializable {
         //access DecryptionResultsController to call methods
         DecryptionResultsController editController = newLoader.getController();
         editController.runCiphertext();
+        //editController.runLanguageFrench();
+        //editController.runLanguageSpanish();
 
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(decryptionEditView);
