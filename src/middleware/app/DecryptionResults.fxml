@@ -32,7 +32,7 @@
                <children>
                   <AnchorPane prefHeight="192.0" prefWidth="800.0">
                      <children>
-                        <Label layoutX="32.0" layoutY="14.0" text="Decryption 1" />
+                        <Label layoutX="32.0" layoutY="14.0" text="Caesar" />
                         <ScrollPane layoutX="17.0" layoutY="35.0" prefHeight="133.0" prefWidth="767.0">
                            <content>
                               <TextArea fx:id="decryptionDisplay1" prefHeight="130.0" prefWidth="763.0" />
@@ -42,7 +42,7 @@
                   </AnchorPane>
                   <AnchorPane prefHeight="200.0" prefWidth="250.0">
                      <children>
-                        <Label layoutX="31.0" layoutY="20.0" text="Decryption 2" />
+                        <Label layoutX="31.0" layoutY="20.0" text="French Translation" />
                         <ScrollPane layoutX="17.0" layoutY="41.0" prefHeight="60.0" prefWidth="767.0">
                            <content>
                               <TextArea fx:id="decryptionDisplay2" prefHeight="57.0" prefWidth="763.0" />
@@ -52,7 +52,7 @@
                   </AnchorPane>
                   <AnchorPane prefHeight="360.0" prefWidth="250.0">
                      <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="27.0" layoutY="14.0" text="Decryption 3" />
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="27.0" layoutY="14.0" text="Spanish Translation" />
                         <ScrollPane layoutX="19.0" layoutY="36.0" prefHeight="60.0" prefWidth="767.0">
                            <content>
                               <TextArea fx:id="decryptionDisplay3" prefHeight="61.0" prefWidth="749.0" />

@@ -138,7 +138,7 @@ public class DecryptionResultsController implements Initializable {
         
         String listResults = "";
         
-        for(int i=0; i<26; i++ ){
+        for(int i=1; i<27; i++ ){
         
         //Variables.
         int key = i;
@@ -184,7 +184,7 @@ public class DecryptionResultsController implements Initializable {
                         
             //decryptionDisplay1.setText(decryptResult);
             
-            listResults = (listResults +"\n" + (i+1) + ":  " + decryptResult);
+            listResults = (listResults +"\n" + (i) + ":  " + decryptResult);
             decryptionDisplay1.setText(listResults);
             System.out.println(decryptResult);
             
