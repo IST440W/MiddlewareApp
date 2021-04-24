@@ -14,64 +14,55 @@
          <children>
             <AnchorPane prefHeight="141.0" prefWidth="800.0">
                <children>
-                  <Button fx:id="closeAppBtn" layoutX="591.0" layoutY="97.0" mnemonicParsing="false" onAction="#closeApplication" text="Close Application" />
-                  <Label layoutX="326.0" layoutY="71.0" text="Decryption Results">
+                  <Button fx:id="closeAppBtn" layoutX="591.0" layoutY="78.0" mnemonicParsing="false" onAction="#closeApplication" text="Close Application" />
+                  <Label layoutX="326.0" layoutY="51.0" text="Decryption Results">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Button fx:id="logoutBtn" layoutX="29.0" layoutY="97.0" mnemonicParsing="false" onAction="#logoutBtnPressed" prefWidth="140.0" text="Logout" />
-                  <Label fx:id="welcomeTitleLabel" contentDisplay="CENTER" layoutX="210.0" layoutY="21.0" text="Middleware Decryption Application ">
+                  <Button fx:id="logoutBtn" layoutX="31.0" layoutY="78.0" mnemonicParsing="false" onAction="#logoutBtnPressed" prefWidth="140.0" text="Logout" />
+                  <Label fx:id="welcomeTitleLabel" contentDisplay="CENTER" layoutX="210.0" layoutY="14.0" text="Middleware Decryption Application ">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
                </children>
             </AnchorPane>
-            <HBox prefHeight="366.0" prefWidth="800.0">
+            <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <AnchorPane prefHeight="200.0" prefWidth="250.0">
-                     <HBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </HBox.margin>
+                  <AnchorPane prefHeight="192.0" prefWidth="800.0">
                      <children>
-                        <Label layoutX="82.0" layoutY="22.0" text="Decryption 1" />
-                        <ScrollPane layoutX="20.0" layoutY="62.0" prefHeight="260.0" prefWidth="210.0">
+                        <Label layoutX="32.0" layoutY="14.0" text="Caesar" />
+                        <ScrollPane layoutX="17.0" layoutY="35.0" prefHeight="133.0" prefWidth="767.0">
                            <content>
-                              <TextArea fx:id="decryptionDisplay1" prefHeight="260.0" />
+                              <TextArea fx:id="decryptionDisplay1" prefHeight="130.0" prefWidth="763.0" />
                            </content>
                         </ScrollPane>
                      </children>
                   </AnchorPane>
                   <AnchorPane prefHeight="200.0" prefWidth="250.0">
-                     <HBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </HBox.margin>
                      <children>
-                        <Label layoutX="81.0" layoutY="23.0" text="Decryption 2" />
-                        <ScrollPane layoutX="19.0" layoutY="62.0" prefHeight="260.0" prefWidth="210.0">
+                        <Label layoutX="31.0" layoutY="20.0" text="French Translation" />
+                        <ScrollPane layoutX="17.0" layoutY="41.0" prefHeight="60.0" prefWidth="767.0">
                            <content>
-                              <TextArea fx:id="decryptionDisplay2" prefHeight="260.0" />
+                              <TextArea fx:id="decryptionDisplay2" prefHeight="57.0" prefWidth="763.0" />
                            </content>
                         </ScrollPane>
                      </children>
                   </AnchorPane>
                   <AnchorPane prefHeight="360.0" prefWidth="250.0">
-                     <HBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </HBox.margin>
                      <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="81.0" layoutY="22.0" text="Decryption 3" />
-                        <ScrollPane layoutX="19.0" layoutY="62.0" prefHeight="260.0" prefWidth="210.0">
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="27.0" layoutY="14.0" text="Spanish Translation" />
+                        <ScrollPane layoutX="19.0" layoutY="36.0" prefHeight="60.0" prefWidth="767.0">
                            <content>
-                              <TextArea fx:id="decryptionDisplay3" prefHeight="260.0" />
+                              <TextArea fx:id="decryptionDisplay3" prefHeight="61.0" prefWidth="749.0" />
                            </content>
                         </ScrollPane>
                      </children>
                   </AnchorPane>
                </children>
-            </HBox>
-            <AnchorPane prefHeight="88.0" prefWidth="800.0">
+            </VBox>
+            <AnchorPane prefHeight="103.0" prefWidth="800.0">
                <children>
                   <Button fx:id="newDecryptBtn" layoutX="632.0" layoutY="29.0" mnemonicParsing="false" onAction="#startNewDecryption" prefWidth="140.0" text="New Decryption" />
                   <Button fx:id="ocrBackBtn" layoutX="29.0" layoutY="29.0" mnemonicParsing="false" onAction="#changeToOCRView" prefWidth="140.0" text="Back" />

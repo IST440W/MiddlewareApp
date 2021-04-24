@@ -6,12 +6,9 @@
 package middleware.app;
 
 import java.io.BufferedReader;
-import middleware.app.MiddlewareApp;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -32,9 +29,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import sun.net.www.http.HttpClient;
 
 /**
  * FXML Controller class
@@ -77,21 +71,31 @@ public class DecryptionResultsController implements Initializable {
 
     // logs user out and changes to LoginPage scene
     public void logoutBtnPressed(ActionEvent event) throws IOException, Exception {
-        //getMainInstance().switchScenes("LoginPage.fxml");
-
-        Parent fileViewParent = FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
-        Scene fileView = new Scene(fileViewParent);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(fileView);
-        window.show();
+        
+        //Opens user confirmation Box and returns boolean response
+        boolean result = ConfirmationBox.displayConfirmBox("Are you sure you want to log out?");
+        if (result == true){
+            Parent fileViewParent = FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
+            Scene fileView = new Scene(fileViewParent);
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(fileView);
+            window.show();
+        }
+        else{}
     }
 
     // closes application
     public void closeApplication(ActionEvent event) {
-        // get a handle to the stage
-        Stage stage = (Stage) closeAppBtn.getScene().getWindow();
-        // do what you have to do
-        stage.close();
+        
+        //Opens user confirmation Box and returns boolean response
+        boolean result = ConfirmationBox.displayConfirmBox("Are you sure you want to close the program?");
+        if (result == true){
+            // get a handle to the stage
+            Stage stage = (Stage) closeAppBtn.getScene().getWindow();
+            // do what you have to do
+            stage.close();
+        }
+        else{}
     }
 
     // changes scene to OCRResultView
@@ -116,22 +120,36 @@ public class DecryptionResultsController implements Initializable {
 
     // starts new decryption process and changes to FileView for new image selection
     public void startNewDecryption(ActionEvent event) throws IOException, Exception {
-        //getMainInstance().switchScenes("FXMLFileView.fxml");
-        Parent fileViewParent = FXMLLoader.load(getClass().getResource("FXMLFileView.fxml"));
-        Scene fileView = new Scene(fileViewParent);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(fileView);
-        window.show();
+        
+        //Opens user confirmation Box and returns boolean response
+        boolean result = ConfirmationBox.displayConfirmBox("Are you sure you want to start new decryption?");
+        if (result == true){
+            Parent fileViewParent = FXMLLoader.load(getClass().getResource("FXMLFileView.fxml"));
+            Scene fileView = new Scene(fileViewParent);
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(fileView);
+            window.show();
+        }
+        else{}
     }
 
     //To send cipher decryption request to Cipher.tools for decryption.
     public void runCiphertext() {
         
+        String listResults = "";
+        
+        for(int i=1; i<27; i++ ){
+        
         //Variables.
-        int key = 8;
+        int key = i;
         String cipherType = "caesar";
-        String ocrString = mainInstance.getOcrResult();
-        ocrString.replace("\n", "").replace("\r", "");
+        String ocrString = mainInstance.getOcrResult().replaceAll(" ", "_");
+        ocrString = ocrString.replaceAll("\n", "__");
+       
+        //ocrString.replace("\n", "").replace("\r", "");
+        
+        
+        
         String cipherQuery;
          
         try {
@@ -160,9 +178,15 @@ public class DecryptionResultsController implements Initializable {
             decryptResult = decryptResult.replace("\"", "");
             decryptResult = decryptResult.replace("plaintext:", "");
             decryptResult = decryptResult.replace("}", "");
-            decryptionDisplay1.setText(decryptResult);
-            System.out.println(decryptResult);
+            //decryptResult = decryptResult.replaceAll("__", "\r\n");
+            decryptResult = decryptResult.replaceAll("__", " ");
+            decryptResult = decryptResult.replaceAll("_", " ");
+                        
+            //decryptionDisplay1.setText(decryptResult);
             
+            listResults = (listResults +"\n" + (i) + ":  " + decryptResult);
+            decryptionDisplay1.setText(listResults);
+            System.out.println(decryptResult);
             
             in.close();
         } 
@@ -173,7 +197,7 @@ public class DecryptionResultsController implements Initializable {
         catch (IOException e) {   
 
         }
-        
+        } 
     }
     
     public void runLanguageFrench() {
