@@ -9,9 +9,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="middleware.app.FXMLFileViewController">
+<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="middleware.app.FXMLFileViewController">
    <children>
-      <SplitPane dividerPositions="0.3595317725752508" layoutX="-2.0" layoutY="-4.0" orientation="VERTICAL" prefHeight="608.0" prefWidth="806.0">
+      <SplitPane dividerPositions="0.3595317725752508" layoutX="-2.0" layoutY="-4.0" orientation="VERTICAL" prefHeight="707.0" prefWidth="806.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="153.0" prefWidth="605.0">
                <children>

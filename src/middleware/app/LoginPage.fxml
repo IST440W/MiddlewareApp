@@ -8,9 +8,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="middleware.app.LoginPageController">
+<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="middleware.app.LoginPageController">
    <children>
-      <SplitPane dividerPositions="0.2157190635451505" orientation="VERTICAL" prefHeight="600.0" prefWidth="800.0">
+      <SplitPane dividerPositions="0.2157190635451505" orientation="VERTICAL" prefHeight="700.0" prefWidth="800.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="107.0" prefWidth="798.0">
                <children>
@@ -21,7 +21,7 @@
                   </Label>
                </children>
             </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="798.0">
                <children>
                   <AnchorPane layoutX="226.0" layoutY="101.0" prefHeight="232.0" prefWidth="318.0">
                      <children>

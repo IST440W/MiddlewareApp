@@ -9,9 +9,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="middleware.app.OCRResultViewController">
+<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="middleware.app.OCRResultViewController">
    <children>
-      <VBox layoutX="-3.0" layoutY="4.0" prefHeight="600.0" prefWidth="800.0">
+      <VBox layoutX="-3.0" layoutY="4.0" prefHeight="700.0" prefWidth="800.0">
          <children>
             <AnchorPane prefHeight="141.0" prefWidth="800.0">
                <children>
@@ -29,7 +29,7 @@
                   </Label>
                </children>
             </AnchorPane>
-            <HBox nodeOrientation="LEFT_TO_RIGHT" prefHeight="407.0" prefWidth="782.0">
+            <HBox nodeOrientation="LEFT_TO_RIGHT" prefHeight="378.0" prefWidth="800.0">
                <children>
                   <AnchorPane prefHeight="407.0" prefWidth="385.0">
                      <children>
@@ -57,11 +57,11 @@
                   </AnchorPane>
                </children>
             </HBox>
-            <AnchorPane prefHeight="96.0" prefWidth="778.0">
+            <AnchorPane prefHeight="113.0" prefWidth="800.0">
                <children>
-                  <Button fx:id="ocrBackBtn" layoutX="51.0" layoutY="18.0" mnemonicParsing="false" onAction="#changeToFileView" prefWidth="140.0" text="Back" />
-                  <Button fx:id="ocrSaveChangesBtn" layoutX="400.0" layoutY="18.0" mnemonicParsing="false" onAction="#editOCRResults" prefWidth="140.0" text="Save Changes" />
-                  <Button fx:id="beginDecryptBtn" layoutX="623.0" layoutY="18.0" mnemonicParsing="false" onAction="#beginDecryption" prefWidth="140.0" text="Begin Decryption" />
+                  <Button fx:id="ocrBackBtn" layoutX="48.0" layoutY="57.0" mnemonicParsing="false" onAction="#changeToFileView" prefWidth="140.0" text="Back" />
+                  <Button fx:id="ocrSaveChangesBtn" layoutX="400.0" layoutY="57.0" mnemonicParsing="false" onAction="#editOCRResults" prefWidth="140.0" text="Save Changes" />
+                  <Button fx:id="beginDecryptBtn" layoutX="622.0" layoutY="57.0" mnemonicParsing="false" onAction="#beginDecryption" prefWidth="140.0" text="Begin Decryption" />
                </children>
             </AnchorPane>
          </children>

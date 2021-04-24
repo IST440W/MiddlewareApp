@@ -57,6 +57,9 @@ public class DecryptionResultsController implements Initializable {
     
     @FXML
     private TextArea decryptionDisplay3;
+    
+    @FXML
+    private TextArea decryptionDisplay4;
 
     private static MiddlewareApp mainInstance;
     
@@ -302,6 +305,7 @@ public class DecryptionResultsController implements Initializable {
                 //response.append("\n");
             }
             br.close();
+           
             return response.toString();
         } catch (IOException ex) {
             ex.printStackTrace();
