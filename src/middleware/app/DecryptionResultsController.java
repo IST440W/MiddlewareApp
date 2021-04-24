@@ -47,6 +47,9 @@ public class DecryptionResultsController implements Initializable {
     private Button newDecryptBtn;
     
     @FXML
+    private Button decryptBackBtn;
+    
+    @FXML
     private TextArea decryptionDisplay1;
     
     @FXML
@@ -56,6 +59,9 @@ public class DecryptionResultsController implements Initializable {
     private TextArea decryptionDisplay3;
 
     private static MiddlewareApp mainInstance;
+    
+    
+    
 
     public DecryptionResultsController() {
         mainInstance = MiddlewareApp.getMainInstance();
@@ -184,12 +190,13 @@ public class DecryptionResultsController implements Initializable {
                         
             //decryptionDisplay1.setText(decryptResult);
             
-            listResults = (listResults +"\n" + (i) + ":  " + decryptResult);
+            listResults = (listResults +"\n" + "Key " + (i) + ":  " + decryptResult);
             decryptionDisplay1.setText(listResults);
             System.out.println(decryptResult);
             
             in.close();
         } 
+        
         
         catch (MalformedURLException e) { 
 
@@ -198,11 +205,16 @@ public class DecryptionResultsController implements Initializable {
 
         }
         } 
+        getMainInstance().setDecrypt1(listResults);
     }
     
     public void runLanguageFrench() {
+        
+        String tempOCRString = mainInstance.getOcrResult().replaceAll("\n", " ");
+             
         try {
-            sendPost(mainInstance.getOcrResult(), "fr" , "https://libretranslate.com/translate");
+            sendPost(tempOCRString, "fr" , "https://libretranslate.com/translate");
+            
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -210,8 +222,12 @@ public class DecryptionResultsController implements Initializable {
     }
 
     public void runLanguageSpanish() {
+          
+        String tempOCRString = mainInstance.getOcrResult().replaceAll("\n", " ");
+          
         try {
-            sendPost(mainInstance.getOcrResult(), "es", "https://libretranslate.com/translate");
+            sendPost(tempOCRString, "es" , "https://libretranslate.com/translate");
+
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -257,10 +273,15 @@ public class DecryptionResultsController implements Initializable {
                 String response = getResponse(connection);
                 if (sourceLanguage == "fr")
                 {
-                    decryptionDisplay2.setText(response.toString());
+                    decryptionDisplay2.setText(response);
+                    getMainInstance().setLang1(response);
                 }
-                else {decryptionDisplay3.setText(response.toString());}
-                System.out.println("Post Response Message: " + response.toString());
+                else {
+                    decryptionDisplay3.setText(response);
+                    getMainInstance().setLang2(response);
+                }
+                System.out.println("Post Response Message: " + response);
+                
             } else {
                 if(sourceLanguage == "fr"){decryptionDisplay2.setText("Bad Response Code: " + responseCode);}
                 else {decryptionDisplay3.setText("Bad Response Code: " + responseCode);}
@@ -278,7 +299,7 @@ public class DecryptionResultsController implements Initializable {
             StringBuilder response = new StringBuilder();
             while ((inputLine = br.readLine()) != null) {
                 response.append(inputLine);
-                response.append("\n");
+                //response.append("\n");
             }
             br.close();
             return response.toString();
