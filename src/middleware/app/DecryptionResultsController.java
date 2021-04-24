@@ -177,8 +177,11 @@ public class DecryptionResultsController implements Initializable {
     }
     
     public void runLanguageFrench() {
+        
+        String tempOCRString = mainInstance.getOcrResult().replaceAll("\n", " ");
+        
         try {
-            sendPost(mainInstance.getOcrResult(), "fr" , "https://libretranslate.com/translate");
+            sendPost(tempOCRString, "fr" , "https://libretranslate.com/translate");
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -186,8 +189,11 @@ public class DecryptionResultsController implements Initializable {
     }
 
     public void runLanguageSpanish() {
+        
+        String tempOCRString = mainInstance.getOcrResult().replaceAll("\n", " ");
+        
         try {
-            sendPost(mainInstance.getOcrResult(), "es", "https://libretranslate.com/translate");
+            sendPost(tempOCRString, "es", "https://libretranslate.com/translate");
         } catch (Exception e) {
             System.out.println(e);
         }

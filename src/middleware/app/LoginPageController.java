@@ -8,6 +8,10 @@ package middleware.app;
 import java.io.IOException;
 import middleware.app.MiddlewareApp;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -71,6 +75,74 @@ public class LoginPageController implements Initializable {
             window.setScene(fileView);
             window.show();
             loginErrorLabel.setOpacity(0);
+        }
+        
+        Connection c = null;
+        Statement statement = null;
+
+        try {
+            Class.forName("org.postgresql.Driver");
+            c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/accounts",
+                    "postgres", "lam144");
+            System.out.println("Opened database successfully");
+
+            statement = c.createStatement();
+
+            //------------------------------------
+            //Statement used to create USERS table
+            //------------------------------------
+//         String sqlCommand = "CREATE TABLE USERS" + "(USERNAME TEXT PRIMARY KEY     NOT NULL, "
+//                                + " PASSWORD    TEXT    NOT NULL)";
+//         statement.executeUpdate(sqlCommand);
+
+
+            //---------------------------------------------- 
+            //Statement used to insert data into USERS table
+            //----------------------------------------------
+//            String sqlCommand = "INSERT INTO USERS(USERNAME,PASSWORD) " +
+//                "VALUES ('AgentMiles', 'testing');";
+//            statement.executeUpdate(sqlCommand);
+
+
+            //----------------------------------------------
+            //ResultSet used to SELECT data from USERS table
+            //----------------------------------------------
+            ResultSet rs = statement.executeQuery("SELECT * FROM USERS;");
+            
+            System.out.println("Selecting all rows from USERS table");
+            
+            //Print data from rs ResultSet
+            while (rs.next()) {
+                String username = rs.getString("username");
+                String password = rs.getString("password");
+                
+                System.out.println(getMainInstance().getUsername() + " " + getMainInstance().getPassword());
+                System.out.println(username + " " + password);
+
+                if (getMainInstance().getUsername().equals(username.toString()) && getMainInstance().getPassword().equals(password.toString()))
+                {
+
+                    Parent fileViewParent = FXMLLoader.load(getClass().getResource("FXMLFileView.fxml"));
+                    Scene fileView = new Scene(fileViewParent);
+                    Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    window.setScene(fileView);
+                    window.show();
+                    loginErrorLabel.setOpacity(0);
+                    break;
+                }
+            }
+
+            //close rs, statement, c
+            rs.close();
+            statement.close();
+            c.close();
+
+            System.out.println("Executed successfully");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
         }
         
         loginErrorLabel.setOpacity(1);
