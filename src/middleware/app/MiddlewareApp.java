@@ -30,8 +30,6 @@ public class MiddlewareApp extends Application {
     private String decrypt2 = "";
     private String lang1 = "";
     private String lang2 = "";
-    private Stage pStage;
-    private String pageDest;
     
     public MiddlewareApp(){
         mainInstance = this;
@@ -203,34 +201,6 @@ public class MiddlewareApp extends Application {
      */
     public void setLang2(String lang2) {
         this.lang2 = lang2;
-    }
-
-    /**
-     * @return the pStage
-     */
-    public Stage getpStage() {
-        return pStage;
-    }
-
-    /**
-     * @param pStage the pStage to set
-     */
-    public void setpStage(Stage pStage) {
-        this.pStage = pStage;
-    }
-
-    /**
-     * @return the pageDest
-     */
-    public String getPageDest() {
-        return pageDest;
-    }
-
-    /**
-     * @param pageDest the pageDest to set
-     */
-    public void setPageDest(String pageDest) {
-        this.pageDest = pageDest;
     }
 
     /**

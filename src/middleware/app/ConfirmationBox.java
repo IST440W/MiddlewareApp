@@ -20,7 +20,7 @@ import javafx.stage.Stage;
  */
 public class ConfirmationBox {
     
-    static boolean result;
+    private static boolean result;
     
     public static boolean displayConfirmBox(String boxMessage){
         Stage window = new Stage();
@@ -38,16 +38,16 @@ public class ConfirmationBox {
         
         //set result to true when clicked
         yesButton.setOnAction(e -> {
-            result = true;
+            setResult(true);
             window.close();
-            System.out.println(result);
+            System.out.println(isResult());
         });
         
         //set result to false when clicked
         noButton.setOnAction(e -> {
-            result = false;
+            setResult(false);
             window.close();
-            System.out.println(result);
+            System.out.println(isResult());
         });
        
         //create HBox and add buttons for horizontal display
@@ -63,8 +63,22 @@ public class ConfirmationBox {
         window.setScene(scene);
         window.showAndWait();
         
-        return result;  
+        return isResult();  
         
+    }
+
+    /**
+     * @return the result
+     */
+    public static boolean isResult() {
+        return result;
+    }
+
+    /**
+     * @param aResult the result to set
+     */
+    public static void setResult(boolean aResult) {
+        result = aResult;
     }
     
 }

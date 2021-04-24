@@ -145,8 +145,6 @@ public class FXMLFileViewController implements Initializable {
         
             //access OCRResultViewController to call methods
             OCRResultViewController editController = newLoader.getController();
-            editController.setImageLocation(getMainInstance().getCurrFileLoc());
-            editController.setImageName(getMainInstance().getImageName());
             editController.getOCR();
             editController.setOCRImage();
         
@@ -172,34 +170,6 @@ public class FXMLFileViewController implements Initializable {
         }
     }
     
-//    /**
-//     * @return the imageLocation
-//     */
-//    public String getImageLocation() {
-//        return imageLocation;
-//    }
-//
-//    /**
-//     * @param imageLocation the imageLocation to set
-//     */
-//    public void setImageLocation(String imageLocation) {
-//        this.imageLocation = imageLocation;
-//    }
-//
-//    /**
-//     * @return the imageName
-//     */
-//    public String getImageName() {
-//        return imageName;
-//    }
-//
-//    /**
-//     * @param imageName the imageName to set
-//     */
-//    public void setImageName(String imageName) {
-//        this.imageName = imageName;
-//    }
-
     /**
      * @return the mainInstance
      */

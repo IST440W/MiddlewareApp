@@ -32,9 +32,7 @@ import net.sourceforge.tess4j.TesseractException;
  */
 public class OCRResultViewController implements Initializable {
 
-    private String imageLocation;
-    private String imageName;
-    private String ocrResult;
+
     private Image image;
     private static MiddlewareApp mainInstance;
 
@@ -178,45 +176,6 @@ public class OCRResultViewController implements Initializable {
 
     }
 
-    //sets ocrTextArea
-    public void setOCRResult(String ocrResult) {
-        ocrTextArea.setText(ocrResult);
-    }
-
-    // returns text from ocrTextArea
-    public String getNewOCRText() {
-        String text = ocrTextArea.getText();
-        return text;
-    }
-
-    /**
-     * @return the imageLocation
-     */
-    public String getImageLocation() {
-        return imageLocation;
-    }
-
-    /**
-     * @param imageLocation the imageLocation to set
-     */
-    public void setImageLocation(String imageLocation) {
-        this.imageLocation = imageLocation;
-    }
-
-    /**
-     * @return the ocrResult
-     */
-    public String getOcrResult() {
-        return ocrResult;
-    }
-
-    /**
-     * @param ocrResult the ocrResult to set
-     */
-    public void setOcrResult(String ocrResult) {
-        this.ocrResult = ocrResult;
-    }
-
     /**
      * @return the image
      */
@@ -229,20 +188,6 @@ public class OCRResultViewController implements Initializable {
      */
     public void setImage(Image image) {
         this.image = image;
-    }
-
-    /**
-     * @return the imageName
-     */
-    public String getImageName() {
-        return imageName;
-    }
-
-    /**
-     * @param imageName the imageName to set
-     */
-    public void setImageName(String imageName) {
-        this.imageName = imageName;
     }
 
     /**

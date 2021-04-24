@@ -65,7 +65,7 @@
             <AnchorPane prefHeight="103.0" prefWidth="800.0">
                <children>
                   <Button fx:id="newDecryptBtn" layoutX="632.0" layoutY="29.0" mnemonicParsing="false" onAction="#startNewDecryption" prefWidth="140.0" text="New Decryption" />
-                  <Button fx:id="ocrBackBtn" layoutX="29.0" layoutY="29.0" mnemonicParsing="false" onAction="#changeToOCRView" prefWidth="140.0" text="Back" />
+                  <Button fx:id="decryptBackBtn" layoutX="29.0" layoutY="29.0" mnemonicParsing="false" onAction="#changeToOCRView" prefWidth="140.0" text="Back" />
                </children>
             </AnchorPane>
          </children>
