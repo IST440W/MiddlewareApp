@@ -60,6 +60,9 @@ public class DecryptionResultsController implements Initializable {
     
     @FXML
     private TextArea decryptionDisplay4;
+    
+    @FXML
+    private TextArea decryptionDisplay5;
 
     private static MiddlewareApp mainInstance;
     
@@ -275,11 +278,11 @@ public class DecryptionResultsController implements Initializable {
             if (responseCode == 200) {
                 String response = getResponse(connection);
                 if (sourceLanguage == "fr")
-                {
+                {   
                     decryptionDisplay2.setText(response);
                     getMainInstance().setLang1(response);
                 }
-                else {
+                else {     
                     decryptionDisplay3.setText(response);
                     getMainInstance().setLang2(response);
                 }
@@ -312,6 +315,71 @@ public class DecryptionResultsController implements Initializable {
         }
         return "";
     }
+    
+     public void runAffinetext() {
+        
+        String listResults = "";
+        
+        for(int i=1; i<27; i++ ){
+        
+            //Variables.
+            int key = i;
+            String cipherType = "affine";
+            String ocrString = mainInstance.getOcrResult().replaceAll(" ", "_");
+            ocrString = ocrString.replaceAll("\n", "__");
+        
+            String cipherQuery;
+         
+            try {
+            
+                //Create connection to send query.
+                URL endpoint = new URL("https://cipher.tools");
+                String endpointString = endpoint.toString();
+                cipherQuery = "/api/v1/decode" + "?" + "cipher=" + cipherType + "&key=" + key + "&ciphertext=" + ocrString;
+                String urlString = endpoint + cipherQuery;
+                URL myURL = new URL(urlString); 
+                URLConnection myURLConnection = myURL.openConnection();
+                //System.out.println(urlString);
+                myURLConnection.connect();
+                //System.out.println("Connecting....");
+                
+                //Read response.
+                try ( 
+                        BufferedReader in = new BufferedReader(new InputStreamReader(myURLConnection.getInputStream()))) {
+                    String inputLine;
+                    String decryptResult = "";
+                    
+                    while ((inputLine = in.readLine()) != null)
+                        
+                        //Display decrypted result.
+                    decryptResult = inputLine.replace("{", "");
+                    decryptResult = decryptResult.replace("\"", "");
+                    decryptResult = decryptResult.replace("plaintext:", "");
+                    decryptResult = decryptResult.replace("}", "");
+                    decryptResult = decryptResult.replaceAll("__", " ");
+                    decryptResult = decryptResult.replaceAll("_", " ");
+                    
+                    //decryptionDisplay1.setText(decryptResult);
+                    
+                    listResults = (listResults +"\n" + "Key " + (i) + ":  " + decryptResult);
+                    decryptionDisplay1.setText(listResults);
+                    System.out.println(decryptResult);
+                }
+            } 
+        
+        
+            catch (MalformedURLException e) { 
+
+            } 
+            catch (IOException e) {   
+
+            }
+        } 
+        getMainInstance().setDecrypt2(listResults);
+    }
+    
+    
+    
     /*
      * @return the mainInstance
      */

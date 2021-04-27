@@ -9,14 +9,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="middleware.app.OCRResultViewController">
+<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="middleware.app.OCRResultViewController">
    <children>
-      <VBox layoutX="-3.0" layoutY="4.0" prefHeight="700.0" prefWidth="800.0">
+      <VBox layoutX="-3.0" layoutY="4.0" prefHeight="800.0" prefWidth="800.0">
          <children>
-            <AnchorPane prefHeight="141.0" prefWidth="800.0">
+            <AnchorPane prefHeight="160.0" prefWidth="800.0">
                <children>
                   <Button fx:id="closeAppBtn" layoutX="626.0" layoutY="81.0" mnemonicParsing="false" onAction="#closeApplication" text="Close Application" />
-                  <Label layoutX="251.0" layoutY="69.0" text="Optical Character Recognition Results">
+                  <Label layoutX="251.0" layoutY="56.0" text="Optical Character Recognition Results">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -29,11 +29,11 @@
                   </Label>
                </children>
             </AnchorPane>
-            <HBox nodeOrientation="LEFT_TO_RIGHT" prefHeight="378.0" prefWidth="800.0">
+            <HBox nodeOrientation="LEFT_TO_RIGHT" prefHeight="479.0" prefWidth="800.0">
                <children>
                   <AnchorPane prefHeight="407.0" prefWidth="385.0">
                      <children>
-                        <ImageView fx:id="ocrImage" fitHeight="332.0" fitWidth="282.0" layoutX="88.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="88.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="75.0" />
+                        <ImageView fx:id="ocrImage" fitHeight="380.0" fitWidth="299.0" layoutX="71.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="71.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="75.0" />
                         <Label layoutX="142.0" layoutY="14.0" text="Image Preview">
                            <font>
                               <Font size="18.0" />
@@ -43,7 +43,7 @@
                   </AnchorPane>
                   <AnchorPane prefHeight="407.0" prefWidth="385.0">
                      <children>
-                        <TextArea fx:id="ocrTextArea" layoutX="12.0" layoutY="75.0" prefHeight="332.0" prefWidth="360.0">
+                        <TextArea fx:id="ocrTextArea" layoutX="12.0" layoutY="75.0" prefHeight="380.0" prefWidth="360.0">
                            <padding>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </padding></TextArea>
