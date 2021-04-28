@@ -49,12 +49,12 @@
                                     <TextArea fx:id="decryptionDisplay4" prefHeight="66.0" prefWidth="757.0" />
                                  </content>
                               </ScrollPane>
-                              <Label layoutX="21.0" text="Bruteforce 2" />
+                              <Label layoutX="21.0" text="Gromark" />
                            </children>
                         </AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="78.0" prefWidth="800.0">
                            <children>
-                              <Label layoutX="23.0" layoutY="4.0" text="Bruteforce 3" />
+                              <Label layoutX="23.0" layoutY="4.0" text="Affine" />
                               <ScrollPane layoutX="20.0" layoutY="25.0" prefHeight="115.0" prefWidth="760.0">
                                  <content>
                                     <TextArea fx:id="decryptionDisplay5" prefHeight="113.0" prefWidth="760.0" />

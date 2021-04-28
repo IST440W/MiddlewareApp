@@ -148,7 +148,7 @@ public class DecryptionResultsController implements Initializable {
     //To send cipher decryption request to Cipher.tools for decryption.
     public void runCiphertext() {
         
-        String listResults = "";
+        String listResults = "Decrypting";
         
         for(int i=1; i<27; i++ ){
         
@@ -211,7 +211,12 @@ public class DecryptionResultsController implements Initializable {
 
         }
         } 
-        getMainInstance().setDecrypt1(listResults);
+        if(listResults != "Decrypting"){
+            getMainInstance().setDecrypt1(listResults);
+        }
+        else{
+            decryptionDisplay1.setText("Unable to decrypt at this time.");
+        }
     }
     
     public void runLanguageFrench() {
@@ -315,70 +320,143 @@ public class DecryptionResultsController implements Initializable {
         }
         return "";
     }
+     
     
-     public void runAffinetext() {
-        
-        String listResults = "";
-        
-        for(int i=1; i<27; i++ ){
-        
-            //Variables.
-            int key = i;
-            String cipherType = "affine";
-            String ocrString = mainInstance.getOcrResult().replaceAll(" ", "_");
-            ocrString = ocrString.replaceAll("\n", "__");
-        
-            String cipherQuery;
+    //new decryption methods
+     public void runGromarkText() { 
+
+        String listResults = ""; 
+
          
-            try {
+        //Variables. 
+        String key = "ENIGMA"; 
+        String cipherType = "periodicgromark"; 
+        String ocrString = mainInstance.getOcrResult().replaceAll(" ", "_");
+        //ocrString = ocrString.replaceAll("\n", "_");
+        String cipherQuery; 
+
+        try { 
+
+            //Create connection to send query. 
+            URL endpoint = new URL("https://cipher.tools"); 
+            String endpointString = endpoint.toString(); 
+            cipherQuery = "/api/v1/decode" + "?" + "cipher=" + cipherType + "&key=" + key + "&ciphertext=" + ocrString; 
+            String urlString = endpoint + cipherQuery; 
+            URL myURL = new URL(urlString);  
+            URLConnection myURLConnection = myURL.openConnection(); 
+            //System.out.println(urlString); 
+            myURLConnection.connect(); 
+            //System.out.println("Connecting...."); 
+ 
+            //Read response. 
+            BufferedReader in = new BufferedReader(new InputStreamReader(myURLConnection.getInputStream())); 
+            String inputLine; 
+            String decryptResult = ""; 
+ 
+            while ((inputLine = in.readLine()) != null)  
+         
+            //Display decrypted result.     
+            decryptResult = inputLine.replace("{", ""); 
+            decryptResult = decryptResult.replace("\"", ""); 
+            decryptResult = decryptResult.replace("plaintext:", ""); 
+            decryptResult = decryptResult.replace("}", "");  
+            decryptResult = decryptResult.replaceAll("__", " ");
+            decryptResult = decryptResult.replaceAll("_", " "); 
             
-                //Create connection to send query.
-                URL endpoint = new URL("https://cipher.tools");
-                String endpointString = endpoint.toString();
-                cipherQuery = "/api/v1/decode" + "?" + "cipher=" + cipherType + "&key=" + key + "&ciphertext=" + ocrString;
-                String urlString = endpoint + cipherQuery;
-                URL myURL = new URL(urlString); 
-                URLConnection myURLConnection = myURL.openConnection();
-                //System.out.println(urlString);
-                myURLConnection.connect();
-                //System.out.println("Connecting....");
-                
-                //Read response.
-                try ( 
-                        BufferedReader in = new BufferedReader(new InputStreamReader(myURLConnection.getInputStream()))) {
-                    String inputLine;
-                    String decryptResult = "";
-                    
-                    while ((inputLine = in.readLine()) != null)
-                        
-                        //Display decrypted result.
-                    decryptResult = inputLine.replace("{", "");
-                    decryptResult = decryptResult.replace("\"", "");
-                    decryptResult = decryptResult.replace("plaintext:", "");
-                    decryptResult = decryptResult.replace("}", "");
-                    decryptResult = decryptResult.replaceAll("__", " ");
-                    decryptResult = decryptResult.replaceAll("_", " ");
-                    
-                    //decryptionDisplay1.setText(decryptResult);
-                    
-                    listResults = (listResults +"\n" + "Key " + (i) + ":  " + decryptResult);
-                    decryptionDisplay1.setText(listResults);
-                    System.out.println(decryptResult);
-                }
-            } 
-        
-        
-            catch (MalformedURLException e) { 
-
-            } 
-            catch (IOException e) {   
-
+            if (decryptResult != null){
+            listResults = (decryptResult);
             }
+            else {
+            listResults = ("Unable to decrypt at this time");        
+            };
+            
+            decryptionDisplay4.setText(listResults);
+
+            System.out.println(decryptResult);         
+            in.close(); 
         } 
-        getMainInstance().setDecrypt2(listResults);
-    }
-    
-    
+        catch (MalformedURLException e) {  
+
+        }  
+        catch (IOException e) {    
+
+        } 
+        
+        getMainInstance().setDecrypt2(listResults); 
+    } 
+
+     
+
+    public void runAffineText() { 
+
+        String listResults = "";
+
+        //Variables. 
+
+        String key = "5%2013"; 
+        String cipherType = "affine";
+        
+        String ocrString = mainInstance.getOcrResult().replaceAll(" ", "_"); 
+        ocrString = ocrString.replaceAll("\n", "_");   
+
+        //ocrString.replace("\n", "").replace("\r", ""); 
+        String cipherQuery; 
+        
+        try { 
+
+            //Create connection to send query. 
+            URL endpoint = new URL("https://cipher.tools"); 
+            String endpointString = endpoint.toString(); 
+            cipherQuery = "/api/v1/decode" + "?" + "cipher=" + cipherType + "&key=" + key + "&ciphertext=" + ocrString; 
+            String urlString = endpoint + cipherQuery; 
+            URL myURL = new URL(urlString);  
+            URLConnection myURLConnection = myURL.openConnection(); 
+            //System.out.println(urlString); 
+            myURLConnection.connect(); 
+            //System.out.println("Connecting...."); 
+           
+            //Read response. 
+            BufferedReader in = new BufferedReader(new InputStreamReader(myURLConnection.getInputStream())); 
+            String inputLine; 
+            String decryptResult = "";   
+
+            while ((inputLine = in.readLine()) != null)  
+                
+            //Display decrypted result.     
+            decryptResult = inputLine.replace("{", ""); 
+            decryptResult = decryptResult.replace("\"", ""); 
+            decryptResult = decryptResult.replace("plaintext:", ""); 
+            decryptResult = decryptResult.replace("}", ""); 
+            decryptResult = decryptResult.replaceAll("__", " "); 
+            decryptResult = decryptResult.replaceAll("_", " "); 
+                        
+            //decryptionDisplay1.setText(decryptResult); 
+            if (decryptResult != null){ 
+                listResults = (decryptResult);
+            }
+            else{
+                listResults = "Unable to decrypt at this time.";
+            }
+             
+
+            System.out.println(decryptResult); 
+
+            in.close(); 
+             
+        } 
+        catch (MalformedURLException e) {  
+
+        }  
+        catch (IOException e) {    
+
+        } 
+
+        decryptionDisplay5.setText(listResults);
+        getMainInstance().setDecrypt3(listResults); 
+    } 
+
+    //To send cipher decryption request to Cipher.tools for decryption. 
+
     
     /*
      * @return the mainInstance

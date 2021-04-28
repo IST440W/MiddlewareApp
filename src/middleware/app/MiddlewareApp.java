@@ -28,7 +28,7 @@ public class MiddlewareApp extends Application {
     private String ocrResult = "";
     private String decrypt1 = "Unable to decrypt at this time";
     private String decrypt2 = "Unable to decrypt at this time";
-    String decrypt3 = "Unable to decrypt at this time";
+    private String decrypt3 = "Unable to decrypt at this time";
     private String lang1 = "Unable to decrypt at this time";
     private String lang2 = "Unable to decrypt at this time";
         
@@ -208,6 +208,20 @@ public class MiddlewareApp extends Application {
      */
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    /**
+     * @return the decrypt3
+     */
+    public String getDecrypt3() {
+        return decrypt3;
+    }
+
+    /**
+     * @param decrypt3 the decrypt3 to set
+     */
+    public void setDecrypt3(String decrypt3) {
+        this.decrypt3 = decrypt3;
     }
         
     }

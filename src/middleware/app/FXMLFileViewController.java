@@ -120,7 +120,7 @@ public class FXMLFileViewController implements Initializable {
         if (result == true){
             // get a handle to the stage
             Stage stage = (Stage) closeAppBtn.getScene().getWindow();
-            // do what you have to do
+            // run closing needed methods
             stage.close();
         }
         else{}
