@@ -28,6 +28,7 @@ public class MiddlewareApp extends Application {
     private String ocrResult = "";
     private String decrypt1 = "";
     private String decrypt2 = "";
+    private String decrypt3 = "";
     private String lang1 = "";
     private String lang2 = "";
     

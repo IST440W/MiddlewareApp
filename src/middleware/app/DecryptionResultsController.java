@@ -138,7 +138,133 @@ public class DecryptionResultsController implements Initializable {
         }
         else{}
     }
-
+//
+//    public void runGromarkText()
+//    {
+//             
+//        String listResults = "";
+//        
+//        //Variables.
+//        String key = "ENIGMA";
+//        String cipherType = "periodicgromark";
+//        String ocrString = mainInstance.getOcrResult().replaceAll(" ", "_");
+//       
+//        String cipherQuery;
+//         
+//        try {
+//            //
+//            //Create connection to send query.
+//            URL endpoint = new URL("https://cipher.tools");
+//            String endpointString = endpoint.toString();
+//            cipherQuery = "/api/v1/decode" + "?" + "cipher=" + cipherType + "&key=" + key + "&ciphertext=" + ocrString;
+//            String urlString = endpoint + cipherQuery;
+//            URL myURL = new URL(urlString); 
+//            URLConnection myURLConnection = myURL.openConnection();
+//            //System.out.println(urlString);
+//            myURLConnection.connect();
+//            //System.out.println("Connecting....");
+//            
+//            
+//            //Read response.
+//            BufferedReader in = new BufferedReader(new InputStreamReader(myURLConnection.getInputStream()));
+//            String inputLine;
+//            String decryptResult = "";
+//            
+//            while ((inputLine = in.readLine()) != null) 
+//            
+//            //Display decrypted result.    
+//            decryptResult = inputLine.replace("{", "");
+//            decryptResult = decryptResult.replace("\"", "");
+//            decryptResult = decryptResult.replace("plaintext:", "");
+//            decryptResult = decryptResult.replace("}", "");
+//            //decryptResult = decryptResult.replaceAll("__", "\r\n");
+//            decryptResult = decryptResult.replaceAll("__", " ");
+//            decryptResult = decryptResult.replaceAll("_", " ");
+//                        
+//            //decryptionDisplay1.setText(decryptResult);
+//            
+//            listResults = (decryptResult);
+//            decryptionDisplay1.setText(listResults);
+//            System.out.println(decryptResult);
+//            
+//            in.close();
+//            
+//        }
+//          catch (MalformedURLException e) { 
+//
+//        } 
+//        catch (IOException e) {   
+//
+//        }
+////        
+////        getMainInstance().setDecrypt3(listResults);
+//    }
+//    
+//    public void runAffineText()
+//    {
+//             
+//        String listResults = "";
+//        
+//
+//        //Variables.
+//        String key = "5%2013";
+//        String cipherType = "affine";
+//        String ocrString = mainInstance.getOcrResult().replaceAll(" ", "_");
+//        ocrString = ocrString.replaceAll("\n", "__");
+//       
+//        //ocrString.replace("\n", "").replace("\r", "");
+//           
+//        String cipherQuery;
+//         
+//        try {
+//            
+//            //Create connection to send query.
+//            URL endpoint = new URL("https://cipher.tools");
+//            String endpointString = endpoint.toString();
+//            cipherQuery = "/api/v1/decode" + "?" + "cipher=" + cipherType + "&key=" + key + "&ciphertext=" + ocrString;
+//            String urlString = endpoint + cipherQuery;
+//            URL myURL = new URL(urlString); 
+//            URLConnection myURLConnection = myURL.openConnection();
+//            //System.out.println(urlString);
+//            myURLConnection.connect();
+//            //System.out.println("Connecting....");
+//            
+//            
+//            //Read response.
+//            BufferedReader in = new BufferedReader(new InputStreamReader(myURLConnection.getInputStream()));
+//            String inputLine;
+//            String decryptResult = "";
+//            
+//            while ((inputLine = in.readLine()) != null) 
+//            
+//            //Display decrypted result.    
+//            decryptResult = inputLine.replace("{", "");
+//            decryptResult = decryptResult.replace("\"", "");
+//            decryptResult = decryptResult.replace("plaintext:", "");
+//            decryptResult = decryptResult.replace("}", "");
+//            //decryptResult = decryptResult.replaceAll("__", "\r\n");
+//            decryptResult = decryptResult.replaceAll("__", " ");
+//            decryptResult = decryptResult.replaceAll("_", " ");
+//                        
+//            //decryptionDisplay1.setText(decryptResult);
+//            
+//            listResults = (decryptResult);
+//            decryptionDisplay1.setText(listResults);
+//            System.out.println(decryptResult);
+//            
+//            in.close();
+//            
+//        }
+//          catch (MalformedURLException e) { 
+//
+//        } 
+//        catch (IOException e) {   
+//
+//        }
+//        
+//        getMainInstance().setDecrypt2(listResults);
+//    }
+    
     //To send cipher decryption request to Cipher.tools for decryption.
     public void runCiphertext() {
         
@@ -153,9 +279,7 @@ public class DecryptionResultsController implements Initializable {
         ocrString = ocrString.replaceAll("\n", "__");
        
         //ocrString.replace("\n", "").replace("\r", "");
-        
-        
-        
+           
         String cipherQuery;
          
         try {
@@ -211,16 +335,10 @@ public class DecryptionResultsController implements Initializable {
     public void runLanguageFrench() {
         
         String tempOCRString = mainInstance.getOcrResult().replaceAll("\n", " ");
-<<<<<<< HEAD
         
         try {
             sendPost(tempOCRString, "fr" , "https://libretranslate.com/translate");
-=======
-             
-        try {
-            sendPost(tempOCRString, "fr" , "https://libretranslate.com/translate");
-            
->>>>>>> 5bfc06ffb4644198e4038492676dcce4a8d9cc35
+
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -228,20 +346,12 @@ public class DecryptionResultsController implements Initializable {
     }
 
     public void runLanguageSpanish() {
-<<<<<<< HEAD
-        
+
         String tempOCRString = mainInstance.getOcrResult().replaceAll("\n", " ");
         
         try {
             sendPost(tempOCRString, "es", "https://libretranslate.com/translate");
-=======
-          
-        String tempOCRString = mainInstance.getOcrResult().replaceAll("\n", " ");
-          
-        try {
-            sendPost(tempOCRString, "es" , "https://libretranslate.com/translate");
 
->>>>>>> 5bfc06ffb4644198e4038492676dcce4a8d9cc35
         } catch (Exception e) {
             System.out.println(e);
         }

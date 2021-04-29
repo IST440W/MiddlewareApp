@@ -88,21 +88,21 @@ public class LoginPageController implements Initializable {
 
             statement = c.createStatement();
 
-            //------------------------------------
-            //Statement used to create USERS table
-            //------------------------------------
+//            //------------------------------------
+//            //Statement used to create USERS table
+//            //------------------------------------
 //         String sqlCommand = "CREATE TABLE USERS" + "(USERNAME TEXT PRIMARY KEY     NOT NULL, "
 //                                + " PASSWORD    TEXT    NOT NULL)";
 //         statement.executeUpdate(sqlCommand);
-
-
-            //---------------------------------------------- 
-            //Statement used to insert data into USERS table
-            //----------------------------------------------
+//
+//
+//            //---------------------------------------------- 
+//            //Statement used to insert data into USERS table
+//            //----------------------------------------------
 //            String sqlCommand = "INSERT INTO USERS(USERNAME,PASSWORD) " +
 //                "VALUES ('AgentMiles', 'testing');";
 //            statement.executeUpdate(sqlCommand);
-
+//
 
             //----------------------------------------------
             //ResultSet used to SELECT data from USERS table
@@ -142,16 +142,15 @@ public class LoginPageController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
         }
         
         loginErrorLabel.setOpacity(1);
     }
     
-    public void loginConfirmed(ActionEvent event) throws IOException
-    {
-       
-    }
+//    public void loginConfirmed(ActionEvent event) throws IOException
+//    {
+//       
+//    }
     
     @FXML
     public void closeApplication (ActionEvent event){
