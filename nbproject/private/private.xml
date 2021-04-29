@@ -3,7 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/jr110/Netbeans/Middleware%20App/src/middleware/app/MiddlewareApp.java</file>
+            <file>file:/C:/Users/Kurtis/Desktop/Assignments/IST%20440W/MiddlewareApp/src/middleware/app/ConfirmationBox.java</file>
+            <file>file:/C:/Users/Kurtis/Desktop/Assignments/IST%20440W/MiddlewareApp/src/middleware/app/DecryptionResultsController.java</file>
+            <file>file:/C:/Users/Kurtis/Desktop/Assignments/IST%20440W/MiddlewareApp/src/middleware/app/LoginPageController.java</file>
+            <file>file:/C:/Users/Kurtis/Desktop/Assignments/IST%20440W/MiddlewareApp/src/middleware/app/MiddlewareApp.java</file>
+            <file>file:/C:/Users/Kurtis/Desktop/Assignments/IST%20440W/MiddlewareApp/src/middleware/app/OCRResultViewController.java</file>
+            <file>file:/C:/Users/Kurtis/Desktop/Assignments/IST%20440W/MiddlewareApp/src/middleware/app/FXMLFileViewController.java</file>
         </group>
     </open-files>
 </project-private>
